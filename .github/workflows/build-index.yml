@@ -1,0 +1,43 @@
+name: Build episodes index
+
+on:
+  schedule:
+    # 09:00 UTC daily (about 3am Springfield time, 4am during daylight saving)
+    - cron: "0 9 * * *"
+  workflow_dispatch:        # lets you run it by hand from the Actions tab
+  push:
+    paths:
+      - "scripts/build_index.py"
+      - ".github/workflows/build-index.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build episodes-index.json
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+        run: python scripts/build_index.py
+
+      - name: Commit if the index changed
+        run: |
+          git config user.name  "innerverse-index-bot"
+          git config user.email "actions@github.com"
+          if git diff --quiet -- episodes-index.json; then
+            echo "No change to episodes-index.json, nothing to commit."
+          else
+            git add episodes-index.json
+            git commit -m "Rebuild episodes index ($(date -u +%Y-%m-%d))"
+            git push
+          fi
