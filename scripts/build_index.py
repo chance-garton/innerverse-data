@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-Build episodes-index.json for the InnerVerse /episodes search widget.
+Build the episode index files for the InnerVerse /episodes search widget.
 
 Sources:
   1. Airtable "InnerVerse Episodes" base  -> episode metadata
-  2. The live Squarespace collection JSON -> canonical URL + thumbnail,
-     and proof the episode actually has a live public page
+  2. The live Squarespace collection JSON -> canonical URL, thumbnail,
+     granular post tags, and proof the episode has a live public page
 
 Only episodes that exist in BOTH are written out, so the widget can never
 link to a page that is not there.
@@ -37,23 +37,19 @@ COLLECTION = "/episodes?format=json&nojs=true"
 
 MIN_YEAR = 2020
 
-# Two files on purpose. The slim index is what the page fetches on load and
-# is roughly a tenth the size; the transcript-derived text is much larger and
-# is fetched lazily just after first paint, widening the same search once it
-# lands. Keeping them separate is what makes the page feel instant.
 OUT_PATH = "episodes-index.json"
 EXTRA_PATH = "episodes-extra.json"
 
 # --- Airtable field IDs (stable across renames) -------------------------
 F_SLUG = "fld9pDFBRiZYNl8IR"
 F_TITLE = "fldGbtuFLmXQhpRj3"
-F_SHOWS = "fld9Ljoj6WcnhudCr"   # Show Categories
-F_TOPICS = "fldLgLKhc4XWca00E"  # Topics
+F_SHOWS = "fld9Ljoj6WcnhudCr"
+F_TOPICS = "fldLgLKhc4XWca00E"
 F_YEAR = "fld37NaLPgm1rnnHN"
-F_DATE = "fldriTOlSEOUxDdYe"    # Publish Date
+F_DATE = "fldriTOlSEOUxDdYe"
 F_DURATION = "fld6Zajp8Ami13S6V"
-F_THUMB = "fldgbAlgTpwOj6V63"   # Thumbnail URL
-F_GUESTS = "fldhrTolEQpztEBCL"  # linked -> Guests
+F_THUMB = "fldgbAlgTpwOj6V63"
+F_GUESTS = "fldhrTolEQpztEBCL"
 F_CHAPTERS = "fldHc4xyaABvEJuf5"
 F_QUOTES = "fld0YCssGV4dgqtkg"
 F_THEMES = "fldZ3ERjnHPk4aZpO"
@@ -62,13 +58,7 @@ F_GUEST_NAME = "fld5YGyyN9zmfXdz4"
 
 
 def get_json(url, headers=None, tries=7):
-    """GET with retry/backoff.
-
-    Two different rate limits apply here. Airtable allows 5 req/sec per
-    base. Squarespace throttles the collection JSON too, and it returns a
-    429 with an HTML body rather than JSON, which is why the backoff is
-    generous: a daily job can afford to wait rather than fail.
-    """
+    """GET with retry/backoff. Airtable and Squarespace both rate-limit."""
     for attempt in range(tries):
         req = urllib.request.Request(
             url, headers={"User-Agent": "innerverse-index-builder", **(headers or {})}
@@ -78,7 +68,6 @@ def get_json(url, headers=None, tries=7):
                 return json.load(r)
         except urllib.error.HTTPError as e:
             if e.code in (429, 500, 502, 503) and attempt < tries - 1:
-                # Honour Retry-After when the server sends one.
                 wait = 0
                 try:
                     wait = int(e.headers.get("Retry-After") or 0)
@@ -116,11 +105,11 @@ def airtable_all(table):
         offset = data.get("offset")
         if not offset:
             return out
-        time.sleep(0.25)  # stay well under the rate limit
+        time.sleep(0.25)
 
 
 def site_index():
-    """Slug -> {url, thumb, title} for every live post on /episodes."""
+    """Slug -> {url, thumb, title, tags} for every live post on /episodes."""
     out = {}
     seen = set()
     url = COLLECTION
@@ -138,6 +127,7 @@ def site_index():
                 "url": SITE + (it.get("fullUrl") or "/episodes/" + slug),
                 "thumb": it.get("assetUrl") or "",
                 "title": it.get("title") or "",
+                "tags": [t for t in (it.get("tags") or []) if isinstance(t, str)],
             }
         pages += 1
         pg = data.get("pagination") or {}
@@ -145,9 +135,6 @@ def site_index():
         if not (pg.get("nextPage") and nxt):
             break
         url = nxt + ("&" if "?" in nxt else "?") + "format=json&nojs=true"
-        # Be a polite guest. This is 17-ish sequential pages against a site
-        # that will start returning 429s if hit hard, and this job runs once
-        # a day, so a second between pages costs nothing that matters.
         time.sleep(1.0)
     return out
 
@@ -161,11 +148,7 @@ def names_from(val):
 
 
 def searchable_extra(fields):
-    """Flatten Chapters/Quotes/Themes JSON into plain text where present.
-
-    As the transcript work fills these in, they simply start appearing here
-    and the widget's search gets deeper with no code change.
-    """
+    """Flatten Chapters/Quotes/Themes JSON into plain text where present."""
     bits = []
     for fid in (F_CHAPTERS, F_QUOTES, F_THEMES):
         raw = fields.get(fid)
@@ -238,8 +221,10 @@ def main():
             "thumb": f.get(F_THUMB) or lv["thumb"],
             "topics": names_from(f.get(F_TOPICS)),
             "shows": names_from(f.get(F_SHOWS)),
+            "tags": lv.get("tags") or [],
             "guests": guests,
             "date": f.get(F_DATE) or "",
+            "year": year,
             "duration": f.get(F_DURATION) or "",
             "extra": searchable_extra(f),
         })
@@ -251,7 +236,6 @@ def main():
 
     stamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
-    # Deep text goes into its own file, keyed by slug.
     extra = {e["slug"]: e["extra"] for e in out if e["extra"]}
     slim = [{k: v for k, v in e.items() if k != "extra"} for e in out]
 
@@ -263,8 +247,9 @@ def main():
         json.dump({"generated": stamp, "count": len(extra), "extra": extra},
                   fh, ensure_ascii=False, separators=(",", ":"))
 
+    tagged = sum(1 for e in slim if e["tags"])
     print(f"\nWrote {OUT_PATH}:  {len(slim)} episodes, "
-          f"{os.path.getsize(OUT_PATH) / 1024:.0f} KB")
+          f"{os.path.getsize(OUT_PATH) / 1024:.0f} KB ({tagged} with tags)")
     print(f"Wrote {EXTRA_PATH}: {len(extra)} episodes with deep text, "
           f"{os.path.getsize(EXTRA_PATH) / 1024:.0f} KB")
     print(f"  skipped: {skipped_year} pre-{MIN_YEAR}, "
