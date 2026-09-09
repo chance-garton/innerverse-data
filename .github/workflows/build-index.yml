@@ -8,6 +8,7 @@ on:
   push:
     paths:
       - "scripts/build_index.py"
+      - "scripts/build_plus_index.py"
       - ".github/workflows/build-index.yml"
 
 permissions:
@@ -30,6 +31,11 @@ jobs:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
         run: python scripts/build_index.py
 
+      # Separate step on purpose: this one needs no Airtable token and must
+      # not be able to take the free /episodes index down with it.
+      - name: Build plus-index.json
+        run: python scripts/build_plus_index.py
+
       - name: Commit if the index changed
         run: |
           git config user.name  "innerverse-index-bot"
@@ -37,10 +43,10 @@ jobs:
           # Stage first. A brand-new file is untracked, and `git diff` does
           # not see untracked files, so checking before staging would report
           # "no change" on the very first run and silently discard the build.
-          git add -A episodes-index.json episodes-extra.json
+          git add -A episodes-index.json episodes-extra.json plus-index.json
           if git diff --cached --quiet; then
             echo "No change to the index, nothing to commit."
           else
-            git commit -m "Rebuild episodes index ($(date -u +%Y-%m-%d))"
+            git commit -m "Rebuild episode indexes ($(date -u +%Y-%m-%d))"
             git push
           fi
