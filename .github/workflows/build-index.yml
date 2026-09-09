@@ -37,9 +37,9 @@ jobs:
           # Stage first. A brand-new file is untracked, and `git diff` does
           # not see untracked files, so checking before staging would report
           # "no change" on the very first run and silently discard the build.
-          git add -A episodes-index.json
+          git add -A episodes-index.json episodes-extra.json
           if git diff --cached --quiet; then
-            echo "No change to episodes-index.json, nothing to commit."
+            echo "No change to the index, nothing to commit."
           else
             git commit -m "Rebuild episodes index ($(date -u +%Y-%m-%d))"
             git push
