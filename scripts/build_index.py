@@ -55,16 +55,30 @@ F_THEMES = "fldZ3ERjnHPk4aZpO"
 F_GUEST_NAME = "fld5YGyyN9zmfXdz4"
 
 
-def get_json(url, headers=None, tries=4):
-    """GET with retry/backoff. Airtable allows 5 req/sec per base."""
+def get_json(url, headers=None, tries=7):
+    """GET with retry/backoff.
+
+    Two different rate limits apply here. Airtable allows 5 req/sec per
+    base. Squarespace throttles the collection JSON too, and it returns a
+    429 with an HTML body rather than JSON, which is why the backoff is
+    generous: a daily job can afford to wait rather than fail.
+    """
     for attempt in range(tries):
-        req = urllib.request.Request(url, headers=headers or {})
+        req = urllib.request.Request(
+            url, headers={"User-Agent": "innerverse-index-builder", **(headers or {})}
+        )
         try:
             with urllib.request.urlopen(req, timeout=60) as r:
                 return json.load(r)
         except urllib.error.HTTPError as e:
             if e.code in (429, 500, 502, 503) and attempt < tries - 1:
-                time.sleep(2 ** attempt)
+                # Honour Retry-After when the server sends one.
+                wait = 0
+                try:
+                    wait = int(e.headers.get("Retry-After") or 0)
+                except Exception:
+                    wait = 0
+                time.sleep(max(wait, min(60, 3 * (2 ** attempt))))
                 continue
             body = ""
             try:
@@ -125,6 +139,10 @@ def site_index():
         if not (pg.get("nextPage") and nxt):
             break
         url = nxt + ("&" if "?" in nxt else "?") + "format=json&nojs=true"
+        # Be a polite guest. This is 17-ish sequential pages against a site
+        # that will start returning 429s if hit hard, and this job runs once
+        # a day, so a second between pages costs nothing that matters.
+        time.sleep(1.0)
     return out
 
 
