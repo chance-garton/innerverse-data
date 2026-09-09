@@ -36,7 +36,13 @@ SITE = "https://www.innerversepodcast.com"
 COLLECTION = "/episodes?format=json&nojs=true"
 
 MIN_YEAR = 2020
+
+# Two files on purpose. The slim index is what the page fetches on load and
+# is roughly a tenth the size; the transcript-derived text is much larger and
+# is fetched lazily just after first paint, widening the same search once it
+# lands. Keeping them separate is what makes the page feel instant.
 OUT_PATH = "episodes-index.json"
+EXTRA_PATH = "episodes-extra.json"
 
 # --- Airtable field IDs (stable across renames) -------------------------
 F_SLUG = "fld9pDFBRiZYNl8IR"
@@ -157,9 +163,8 @@ def names_from(val):
 def searchable_extra(fields):
     """Flatten Chapters/Quotes/Themes JSON into plain text where present.
 
-    These are blank on most rows today. As the transcript work fills them
-    in, they simply start appearing here and the widget's search gets
-    deeper with no code change.
+    As the transcript work fills these in, they simply start appearing here
+    and the widget's search gets deeper with no code change.
     """
     bits = []
     for fid in (F_CHAPTERS, F_QUOTES, F_THEMES):
@@ -244,18 +249,24 @@ def main():
     if not out:
         sys.exit("ERROR: built an empty index; refusing to overwrite the live file.")
 
-    payload = {
-        "generated": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "count": len(out),
-        "episodes": out,
-    }
-    with open(OUT_PATH, "w", encoding="utf-8") as fh:
-        json.dump(payload, fh, ensure_ascii=False, separators=(",", ":"))
+    stamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
-    size_kb = os.path.getsize(OUT_PATH) / 1024
-    with_extra = sum(1 for e in out if e["extra"])
-    print(f"\nWrote {OUT_PATH}: {len(out)} episodes, {size_kb:.0f} KB")
-    print(f"  with chapters/quotes/themes text: {with_extra}")
+    # Deep text goes into its own file, keyed by slug.
+    extra = {e["slug"]: e["extra"] for e in out if e["extra"]}
+    slim = [{k: v for k, v in e.items() if k != "extra"} for e in out]
+
+    with open(OUT_PATH, "w", encoding="utf-8") as fh:
+        json.dump({"generated": stamp, "count": len(slim), "episodes": slim},
+                  fh, ensure_ascii=False, separators=(",", ":"))
+
+    with open(EXTRA_PATH, "w", encoding="utf-8") as fh:
+        json.dump({"generated": stamp, "count": len(extra), "extra": extra},
+                  fh, ensure_ascii=False, separators=(",", ":"))
+
+    print(f"\nWrote {OUT_PATH}:  {len(slim)} episodes, "
+          f"{os.path.getsize(OUT_PATH) / 1024:.0f} KB")
+    print(f"Wrote {EXTRA_PATH}: {len(extra)} episodes with deep text, "
+          f"{os.path.getsize(EXTRA_PATH) / 1024:.0f} KB")
     print(f"  skipped: {skipped_year} pre-{MIN_YEAR}, "
           f"{skipped_nolive} with no live page, {skipped_noslug} with no slug")
 
