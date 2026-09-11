@@ -79,6 +79,16 @@ SHOWS = {
 # to match the /plus taxonomy (the /episodes collection uses a different,
 # incompatible category set) using the same Show/Theme as its sibling
 # Oera Linda entries above.
+#
+# 2026-09-11: astroherbalism-gemini, astroherbalism-cancer and
+# leo-astroherbalism are the same reverse case as jan-ott-dylan-saccoccio
+# above, applied to the Astro-Herbalism remaster series - they're free
+# /episodes posts that never had a /plus page, but Chance wants them
+# surfaced in /plus browsing so premium members notice them. Same pattern
+# applies to every future Astro-Herbalism remake: add it here too, using
+# its Airtable Show Categories ("Astro-Herbalism", "Vibe Rant") and Themes
+# ("Holistic Health" / "Myth-Symbolism-Language" etc, renamed to match the
+# /plus taxonomy's hyphenated theme names) and its own publish date.
 REDIRECTS = {
     "crrow777-revelation": {
         "title": "Was the Book of Revelation Rewritten? Crrow777 w/ Chance Garton",
@@ -127,6 +137,30 @@ REDIRECTS = {
         "shows": ["Inner Whirled", "Innerverse"],
         "themes": ["Myth-Symbolism-Language", "Alternative History"],
         "date": "2023-04-16",
+    },
+    "astroherbalism-gemini": {
+        "title": "Gemini Astro-Herbalism: Mercury, The Air Element, & Herbal Signatures",
+        "url": SITE + "/episodes/astroherbalism-gemini",
+        "thumb": "https://images.squarespace-cdn.com/content/5987d897cf81e0278ec5322e/1780664773490-213VV4VPZJFH1B8N68QI/Gemini+Herbs+Mercury%2C+Cedar%2C+Holy+Basil+%26+The+Mint+Mystery++Astro-Herbalism.png",
+        "shows": ["Astro-Herbalism", "Vibe Rant"],
+        "themes": ["Holistic Health", "Myth-Symbolism-Language"],
+        "date": "2026-06-05",
+    },
+    "astroherbalism-cancer": {
+        "title": "Cancer Astro-Herbalism: Linden, Willow, Marshmallow & Aloe",
+        "url": SITE + "/episodes/astroherbalism-cancer",
+        "thumb": "https://images.squarespace-cdn.com/content/5987d897cf81e0278ec5322e/1788905125293-1HCB4AP9SAO2UQETQKR0/Cancer+Season+Herbs+Linden%2C+Willow%2C+Marshmallow%2C+Aloe++Astro+Herbalism.jpg",
+        "shows": ["Astro-Herbalism", "Vibe Rant"],
+        "themes": ["Holistic Health", "Myth-Symbolism-Language"],
+        "date": "2026-06-17",
+    },
+    "leo-astroherbalism": {
+        "title": "St John's Wort, Motherwort & Hawthorn: Leo Season Herbs",
+        "url": SITE + "/episodes/leo-astroherbalism",
+        "thumb": "https://images.squarespace-cdn.com/content/5987d897cf81e0278ec5322e/1786888416132-9H0MKV4JJKDLQ2D2TH11/ASTROHERBALISM+VIBE+RANT+LEO+INNERVERSE.png",
+        "shows": ["Astro-Herbalism", "Vibe Rant"],
+        "themes": ["Holistic Health", "Myth-Symbolism-Language"],
+        "date": "2026-08-16",
     },
 }
 
