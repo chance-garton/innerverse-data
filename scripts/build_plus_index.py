@@ -65,11 +65,12 @@ SHOWS = {
 #     (the /plus title is literally tagged "(Copy)" - a duplicate post)
 #   - oera-linda-book-examined -> /episodes/oera-linda-book
 #
-# dylan-saccoccio-norse-phoenicians-te78l (Phoenician Origins of Norse
-# Mythology) was checked against the same list and has NO matching free
-# page - it is a distinct, real Plus episode (own Vimeo ID) and is
-# deliberately left OUT of this list. Do not add it without Chance
-# confirming what it should point to.
+# 2026-09-11: dylan-saccoccio-norse-phoenicians-te78l (Phoenician Origins
+# of Norse Mythology) was checked against the same list and had no
+# matching free page - Chance resolved it directly by moving the post
+# itself from /plus to /episodes under the SAME slug, so no slug-mismatch
+# redirect logic is needed here; it just falls out of live_slugs like any
+# other episode once it disappeared from /plus.
 #
 # 2026-09-11: jan-ott-dylan-saccoccio-oera-linda-book is the reverse case -
 # a free /episodes post that never had a /plus page at all, but covers the
@@ -118,6 +119,14 @@ REDIRECTS = {
         "shows": ["Innerverse"],
         "themes": ["Myth-Symbolism-Language", "Alternative History"],
         "date": "2023-08-28",
+    },
+    "dylan-saccoccio-norse-phoenicians-te78l": {
+        "title": "Phoenician Origins of Norse Mythology: Dylan Saccoccio on the Trail of the Holy Sailors",
+        "url": SITE + "/episodes/dylan-saccoccio-norse-phoenicians-te78l",
+        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1779280397625-U6L03NZQ6NF1L06HZG7P/Phoenician+Origins+of+Norse+Mythology+Dylan+Saccoccio+on+the+Trail+of+the+Holy+Sailors.png",
+        "shows": ["Inner Whirled", "Innerverse"],
+        "themes": ["Myth-Symbolism-Language", "Alternative History"],
+        "date": "2023-04-16",
     },
 }
 
@@ -218,4 +227,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
