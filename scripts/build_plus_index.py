@@ -162,6 +162,19 @@ REDIRECTS = {
         "themes": ["Holistic Health", "Myth-Symbolism-Language"],
         "date": "2026-08-16",
     },
+    # 2026-09-13: call-of-the-old-gods deleted from /plus (Chance confirmed:
+    # the full 2-hour recording was released for free, so the Plus cut is
+    # entirely redundant - the free episode's own Duration is 1h 59m, an
+    # exact match for what had been the Plus-only runtime). Free page lives
+    # under a different slug, same pattern as crrow777-revelation above.
+    "call-of-the-old-gods": {
+        "title": "The Call of the Old Gods: Paganism & the Cosmic Archetypal Psyche | Dr. Christopher McIntosh",
+        "url": SITE + "/episodes/christopher-mcintosh-call-of-the-old-gods",
+        "thumb": "https://images.squarespace-cdn.com/content/5987d897cf81e0278ec5322e/1750350587770-492O095QJUIBUJCIPG3C/mcintosh-sq-thumb.jpg?content-type=image%2Fjpeg",
+        "shows": ["Innerverse"],
+        "themes": ["Myth-Symbolism-Language", "Consciousness And Reality"],
+        "date": "2025-06-19",
+    },
 }
 
 
