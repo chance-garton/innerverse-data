@@ -162,6 +162,14 @@ REDIRECTS = {
         "themes": ["Holistic Health", "Myth-Symbolism-Language"],
         "date": "2026-08-16",
     },
+    "astroherbalism-virgo": {
+        "title": "Virgo Season Herbs: Gentle Plant Medicine for Digestion, Nerves & Calm",
+        "url": SITE + "/episodes/astroherbalism-virgo",
+        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1789568552495-0SKTMKOZUX0D3HJKVL4I/ASTROHERBALISM+VIRGO+INNERVERSE.png",
+        "shows": ["Astro-Herbalism", "Vibe Rant"],
+        "themes": ["Holistic Health", "Myth-Symbolism-Language"],
+        "date": "2026-09-16",
+    },
     # 2026-09-13: call-of-the-old-gods deleted from /plus (Chance confirmed:
     # the full 2-hour recording was released for free, so the Plus cut is
     # entirely redundant - the free episode's own Duration is 1h 59m, an
