@@ -90,7 +90,21 @@ SHOWS = {
 # ("Holistic Health" / "Myth-Symbolism-Language" etc, renamed to match the
 # /plus taxonomy's hyphenated theme names) and its own publish date.
 REDIRECTS = {
-    "crrow777-revelation": {
+        # 2026-09-18: robert-comber-lost-octave is the reverse case again - a
+    # free /episodes post with no /plus page. The guest objected to the
+    # second half being paywalled, so the FULL 2h20m version was published
+    # free everywhere (YouTube and Acast both carry it). Chance still wants
+    # it in the members' feed, and the free-item path picks up the row's
+    # Acast Audio URL, which is already the full cut.
+    "robert-comber-lost-octave": {
+        "title": "Robert Comber | The Lost Octave of the I Ching: Star Lore, Number, & The Cosmic Language Pattern",
+        "url": SITE + "/episodes/robert-comber-lost-octave",
+        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1713195924164-7B0L6DSJJZ0KQV973ZLN/IMG_4732.JPG",
+        "shows": ["Innerverse"],
+        "themes": ["Consciousness And Reality", "Myth-Symbolism-Language"],
+        "date": "2024-04-15",
+    },
+"crrow777-revelation": {
         "title": "Was the Book of Revelation Rewritten? Crrow777 w/ Chance Garton",
         "url": SITE + "/episodes/crrow-777-revelation",
         "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1784137886568-KVUH2MF5UQ9EOCTO04HV/crrow777-1st.jpg",
