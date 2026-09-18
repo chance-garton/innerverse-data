@@ -104,6 +104,28 @@ REDIRECTS = {
         "themes": ["Consciousness And Reality", "Myth-Symbolism-Language"],
         "date": "2024-04-15",
     },
+    # 2026-09-18: clive-de-carle-nutritional-gnosis and elise-frosch are the
+    # same case as robert-comber-lost-octave above - free /episodes posts
+    # that were given away in full, so there is no members-only cut and no
+    # /plus page to build. Chance wants both surfaced in /plus browsing and
+    # in the members' feed, and the free-item path picks up each row's
+    # Acast Audio URL, which is already the full show.
+    "clive-de-carle-nutritional-gnosis": {
+        "title": "Clive De Carle | Effective Nutritional Gnosis: Supplements, Health Technology & the Magic Chair",
+        "url": SITE + "/episodes/clive-de-carle-nutritional-gnosis",
+        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1735662645314-598PS88WFXPXLQOPDT05/IMG_6786.JPG",
+        "shows": ["Innerverse"],
+        "themes": ["Holistic Health"],
+        "date": "2024-12-31",
+    },
+    "elise-frosch": {
+        "title": "Elise Frosch | Preparing For Childbearing: Advice and Techniques For Estatic Natural Birth",
+        "url": SITE + "/episodes/elise-frosch",
+        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1720536260358-J27KNL8VLM7L0WOENXMV/IMG_5280.JPG",
+        "shows": ["Innerverse"],
+        "themes": ["Holistic Health"],
+        "date": "2024-07-09",
+    },
 "crrow777-revelation": {
         "title": "Was the Book of Revelation Rewritten? Crrow777 w/ Chance Garton",
         "url": SITE + "/episodes/crrow-777-revelation",
