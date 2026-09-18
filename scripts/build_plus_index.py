@@ -219,6 +219,19 @@ REDIRECTS = {
         "themes": ["Myth-Symbolism-Language", "Consciousness And Reality"],
         "date": "2025-06-19",
     },
+    # 2026-09-18: kurtis-r-kallenbach-placenta is another free-in-full case.
+    # It went out as a Vibe Rant and never got a members-only cut, so there
+    # is no Vimeo upload and no /plus page to build. Chance wants it in
+    # /plus browsing and in the members' feed off the row's Acast Audio URL,
+    # which is the full 3h 2m show.
+    "kurtis-r-kallenbach-placenta": {
+        "title": "Your Birth Certificate Belongs to a Dead Person: The Placenta Mystery | Kurtis R. Kallenbach",
+        "url": SITE + "/episodes/kurtis-r-kallenbach-placenta",
+        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1780603254560-BAGCUSRQ2QROPM3A17CH/Your+Birth+Certificate+Belongs+to+a+Dead+Person+The+Placenta+Mystery++Kurtis+R.+Kallenbach.png",
+        "shows": ["Innerverse", "Vibe Rant"],
+        "themes": ["Holistic Health", "Alternative History"],
+        "date": "2023-05-10",
+    },
 }
 
 
