@@ -9,6 +9,7 @@ on:
     paths:
       - "scripts/build_index.py"
       - "scripts/build_plus_index.py"
+      - "scripts/build_episode_files.py"
       - ".github/workflows/build-index.yml"
 
 permissions:
@@ -31,6 +32,16 @@ jobs:
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
         run: python scripts/build_index.py
 
+      # One static JSON file per episode, read directly by the episode
+      # pages. These files are what let the render script stop calling
+      # api.airtable.com with a token that anyone could read out of the
+      # page source. The script aborts without writing if the Airtable
+      # pull comes back short, so a bad run cannot blank the site.
+      - name: Build per-episode files
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+        run: python scripts/build_episode_files.py
+
       # Separate step on purpose: this one needs no Airtable token and must
       # not be able to take the free /episodes index down with it.
       - name: Build plus-index.json
@@ -43,7 +54,7 @@ jobs:
           # Stage first. A brand-new file is untracked, and `git diff` does
           # not see untracked files, so checking before staging would report
           # "no change" on the very first run and silently discard the build.
-          git add -A episodes-index.json episodes-extra.json plus-index.json
+          git add -A episodes-index.json episodes-extra.json plus-index.json episodes
           if git diff --cached --quiet; then
             echo "No change to the index, nothing to commit."
           else
