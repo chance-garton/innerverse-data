@@ -88,6 +88,7 @@ EP_FIELDS = {
     "fldFQrou1GZ8E0xkM": "Plus Core Themes JSON",
     "fldKP65RFUUYjrERr": "Plus Free Chapters JSON",
     "fldimHDwCSXcFrTuQ": "Plus Duration",
+    "fldIdVE9Rirax4Ic9": "Audio Offset Seconds",
 }
 
 # Fields the related-episodes corpus needs, and only those. It is fetched
