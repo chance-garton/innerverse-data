@@ -119,7 +119,7 @@ REDIRECTS = {
         "date": "2024-12-31",
     },
     "elise-frosch": {
-        "title": "Elise Frosch | Preparing For Childbearing: Advice and Techniques For Estatic Natural Birth",
+        "title": "Elise Frosch | Preparing For Childbearing: Advice and Techniques For Ecstatic Natural Birth",
         "url": SITE + "/episodes/elise-frosch",
         "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1720536260358-J27KNL8VLM7L0WOENXMV/IMG_5280.JPG",
         "shows": ["Innerverse"],
