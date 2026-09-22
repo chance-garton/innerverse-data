@@ -35,6 +35,21 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+def clean_image_url(u):
+    """Strip the query off a Squarespace image URL.
+
+    The CDN only honours format= as the FIRST query parameter, so a stored
+    URL like ...png?content-type=image%2Fpng defeats every attempt to resize
+    it later and the full size file is served instead. The site always
+    appends its own format=, so the clean base URL is what belongs in the
+    index files. See claude/iv-home.md in the Website Recode project.
+    """
+    u = (u or "").strip()
+    if "images.squarespace-cdn.com" in u and "?" in u:
+        return u.split("?", 1)[0]
+    return u
+
+
 AIRTABLE_TOKEN = os.environ.get("AIRTABLE_TOKEN", "").strip()
 if not AIRTABLE_TOKEN:
     sys.exit("ERROR: AIRTABLE_TOKEN is not set. Add it as a repository secret.")
@@ -263,7 +278,7 @@ def main():
                 newest_plus = {
                     "slug": plus_slug or slug,
                     "title": f.get("Title") or "",
-                    "thumb": f.get("Thumbnail URL") or "",
+                    "thumb": clean_image_url(f.get("Thumbnail URL")),
                     "date": date,
                     "duration": f.get("Plus Duration") or f.get("Duration") or "",
                     "topicLine": f.get("Topic Line") or "",
