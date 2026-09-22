@@ -315,6 +315,9 @@ def plus_posts():
         if slug not in live_slugs:
             out.append({"slug": slug, **entry})
 
+    for e in out:
+        e["thumb"] = clean_image_url(e.get("thumb"))
+
     out.sort(key=lambda e: (e["date"] or ""), reverse=True)
     return out
 
