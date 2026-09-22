@@ -233,7 +233,7 @@ def main():
             "slug": slug,
             "title": f.get(F_TITLE) or lv["title"],
             "url": lv["url"],
-            "thumb": f.get(F_THUMB) or lv["thumb"],
+            "thumb": clean_image_url(f.get(F_THUMB) or lv["thumb"]),
             "topics": names_from(f.get(F_TOPICS)),
             "shows": names_from(f.get(F_SHOWS)),
             "tags": lv.get("tags") or [],
