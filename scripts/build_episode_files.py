@@ -109,7 +109,7 @@ EP_FIELDS = {
 # Fields the related-episodes corpus needs, and only those. It is fetched
 # once per page by every episode page, so it stays lean.
 CORPUS_FIELDS = [
-    "Slug", "Title", "Topic Line", "Topics", "Show Categories",
+    "Slug", "Plus Slug", "Title", "Topic Line", "Topics", "Show Categories",
     "Guests", "Publish Date", "Thumbnail URL", "Episode Number",
 ]
 
