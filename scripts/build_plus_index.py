@@ -14,6 +14,15 @@ which is exactly why the browser cannot build this index for itself.
 
 Runs alongside build_index.py in the same daily workflow. Kept separate so a
 failure here can never take the free /episodes index down with it.
+
+2026-09-25: each entry is also ENRICHED from the files the two Airtable
+builders wrote earlier in the same run (episodes/<slug>.json and
+episodes-index.json), read from disk, never from Airtable: freeSlug (the
+row's Slug, so the /plus archive can join the members' post to its free
+side by slug instead of by title), topicLine, plusDuration, guests, topics
+and tags. Every field is optional and the enrichment is skipped, entry by
+entry, when a file is missing, so this script still needs no token and
+still cannot fail on the free side's account.
 """
 
 import html
@@ -42,6 +51,15 @@ def clean_image_url(u):
 SITE = "https://www.innerversepodcast.com"
 COLLECTION = "/plus?format=json&nojs=true"
 OUT_PATH = "plus-index.json"
+
+# Where the enrichment comes from: the per-episode files (one per Slug and
+# one per Plus Slug, so a members' slug resolves directly) and the free
+# index (for the Squarespace tags on the free post). Both are written
+# earlier in the same workflow run; if either is absent the entries simply
+# go out without those fields, as they did before 2026-09-25.
+EPISODES_DIR = "episodes"
+FREE_INDEX_PATH = "episodes-index.json"
+HOST_NAME = "Chance Garton"
 
 # Categories that name a SHOW rather than a theme, lower-cased for matching.
 # Anything else a post carries is treated as a theme, so a NEW THEME needs no
@@ -322,6 +340,61 @@ def plus_posts():
     return out
 
 
+def free_slug_of(entry):
+    """The free page's slug for an entry: the /episodes/<slug> in a
+    REDIRECTS url, else the entry's own slug (free and Plus share it on
+    every normally deployed row)."""
+    url = entry.get("url") or ""
+    marker = "/episodes/"
+    if marker in url:
+        return url.split(marker, 1)[1].split("?", 1)[0].split("#", 1)[0].strip("/")
+    return entry["slug"]
+
+
+def read_json(path):
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh)
+    except (OSError, ValueError):
+        return None
+
+
+def enrich(posts):
+    """Add freeSlug, topicLine, plusDuration, guests, topics and tags from
+    the files the Airtable builders wrote earlier in this run. Read-only,
+    best effort, one entry at a time."""
+    free_index = read_json(FREE_INDEX_PATH) or {}
+    free_by_slug = {e.get("slug"): e for e in free_index.get("episodes") or [] if e.get("slug")}
+    hit = 0
+    for e in posts:
+        candidates = [e["slug"], free_slug_of(e)]
+        ep = None
+        for c in candidates:
+            ep = read_json(os.path.join(EPISODES_DIR, c + ".json"))
+            if ep:
+                break
+        if not ep:
+            continue
+        f = ep.get("fields") or {}
+        free_slug = f.get("Slug") or free_slug_of(e)
+        e["freeSlug"] = free_slug
+        if f.get("Topic Line"):
+            e["topicLine"] = f["Topic Line"]
+        if f.get("Plus Duration"):
+            e["plusDuration"] = f["Plus Duration"]
+        if f.get("Topics"):
+            e["topics"] = list(f["Topics"])
+        guests = [g.get("Name") for g in (ep.get("_guestsById") or {}).values() if g.get("Name")]
+        guests = [g for g in guests if g != HOST_NAME]
+        if guests:
+            e["guests"] = guests
+        free = free_by_slug.get(free_slug)
+        if free and free.get("tags"):
+            e["tags"] = list(free["tags"])
+        hit += 1
+    return hit
+
+
 def main():
     print("Fetching the /plus collection ...")
     posts = plus_posts()
@@ -332,6 +405,9 @@ def main():
     # live fetch still has to clear ~40 on its own for this to pass.)
     if len(posts) < 40:
         sys.exit("ERROR: /plus returned suspiciously few posts; refusing to write.")
+
+    enriched = enrich(posts)
+    print(f"  {enriched} of {len(posts)} entries enriched from {EPISODES_DIR}/ and {FREE_INDEX_PATH}")
 
     stamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     with open(OUT_PATH, "w", encoding="utf-8") as fh:
