@@ -359,6 +359,56 @@ def read_json(path):
         return None
 
 
+# 2026-10-01 (Chance): "vibe rant and other free shows should be on both
+# pages, including this batch and any future batch". Free-only shows have
+# no members' cut, so they never get a /plus post, yet members should find
+# them in /plus browsing and in the private feed. Rather than a REDIRECTS
+# entry per episode, every LIVE free post (it is in episodes-index.json,
+# which only lists published /episodes pages) whose shows include one of
+# these is added here automatically, pointing at its /episodes page. The
+# REDIRECTS list above stays for one-off cases outside these shows.
+# Chance Guest Spots is deliberately not included (his appearances on
+# other people's shows).
+FREE_SHOWS = {"vibe rant", "astro-herbalism", "marvelous demystifiers"}
+
+# /episodes theme names -> the /plus taxonomy's names.
+THEME_TO_PLUS = {
+    "consciousness & reality": "Consciousness And Reality",
+    "myth, symbolism, & language": "Myth-Symbolism-Language",
+    "holistic health": "Holistic Health",
+    "historical investigations": "Alternative History",
+}
+
+
+def free_show_entries(posts):
+    """Entries for live free-show episodes not already in the list (by slug,
+    or by the free slug a REDIRECTS url points at)."""
+    free_index = read_json(FREE_INDEX_PATH) or {}
+    have = set()
+    for e in posts:
+        have.add(e["slug"])
+        have.add(free_slug_of(e))
+    added = []
+    for f in free_index.get("episodes") or []:
+        slug = f.get("slug")
+        shows = f.get("shows") or []
+        if not slug or slug in have:
+            continue
+        if not any(s.strip().lower() in FREE_SHOWS for s in shows):
+            continue
+        added.append({
+            "slug": slug,
+            "title": f.get("title") or "",
+            "url": SITE + "/episodes/" + slug,
+            "thumb": clean_image_url(f.get("thumb")),
+            "shows": [s for s in shows if s.strip().lower() in SHOWS],
+            "themes": [THEME_TO_PLUS.get(t.strip().lower(), t) for t in (f.get("topics") or [])],
+            "date": f.get("date") or "",
+        })
+        have.add(slug)
+    return added
+
+
 def enrich(posts):
     """Add freeSlug, topicLine, plusDuration, guests, topics and tags from
     the files the Airtable builders wrote earlier in this run. Read-only,
@@ -405,6 +455,12 @@ def main():
     # live fetch still has to clear ~40 on its own for this to pass.)
     if len(posts) < 40:
         sys.exit("ERROR: /plus returned suspiciously few posts; refusing to write.")
+
+    extra = free_show_entries(posts)
+    if extra:
+        posts.extend(extra)
+        posts.sort(key=lambda e: (e["date"] or ""), reverse=True)
+    print(f"  {len(extra)} free-show episodes added from {FREE_INDEX_PATH}")
 
     enriched = enrich(posts)
     print(f"  {enriched} of {len(posts)} entries enriched from {EPISODES_DIR}/ and {FREE_INDEX_PATH}")
