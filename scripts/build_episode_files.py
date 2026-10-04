@@ -104,6 +104,9 @@ EP_FIELDS = {
     "fldKP65RFUUYjrERr": "Plus Free Chapters JSON",
     "fldimHDwCSXcFrTuQ": "Plus Duration",
     "fldIdVE9Rirax4Ic9": "Audio Offset Seconds",
+    # 2026-10-04: a tick only. The members' show notes FILE lives in the
+    # Worker's private R2 bucket and never appears in Airtable or here.
+    "flddUHbMjDNUseecH": "Has Show Notes",
 }
 
 # Fields the related-episodes corpus needs, and only those. It is fetched
