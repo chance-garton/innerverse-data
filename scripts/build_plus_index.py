@@ -239,6 +239,15 @@ REDIRECTS = {
         "themes": ["Holistic Health", "Myth-Symbolism-Language"],
         "date": "2026-09-16",
     },
+    # 2026-10-21: astroherbalism-libra, the Libra remake (free only, no /plus page).
+    "astroherbalism-libra": {
+        "title": "Libra Herbs: What Makes a Plant Venusian?",
+        "url": SITE + "/episodes/astroherbalism-libra",
+        "thumb": "https://images.squarespace-cdn.com/content/5987d897cf81e0278ec5322e/11923032-4880-4cce-a7bf-bb2a4e0b52de/Libra-herbs_-goddess-of-balance.jpg",
+        "shows": ["Astro-Herbalism", "Vibe Rant"],
+        "themes": ["Holistic Health", "Myth-Symbolism-Language"],
+        "date": "2026-10-21",
+    },
     # 2026-09-13: call-of-the-old-gods deleted from /plus (Chance confirmed:
     # the full 2-hour recording was released for free, so the Plus cut is
     # entirely redundant - the free episode's own Duration is 1h 59m, an
