@@ -323,5 +323,53 @@ def main():
         print(f"  WARNING: slug collision on {name}: {first} kept, {second} skipped")
 
 
+# --- Promotions (temporary site-wide promo box, 2026-10-25) ----------------
+# One row ticked Active in the Promotions table becomes promo.json at the
+# REPO ROOT (episodes/ is pruned). The Code Injection block iv-promo reads it.
+# Nothing ticked writes {"active": false}, which turns the box off. A failure
+# here never stops the episode build and leaves the last promo.json in place.
+PROMOS_TABLE = "tbl0qlMa30JuzMW1f"
+PROMO_FIELDS = {
+    "fldPQekDu7XBRlvzC": "name", "fldHBYxRNJvzRxeqp": "active", "fld9rUK9MzaXw91ou": "endsOn",
+    "fldsSZnYSq5uNTLPq": "eyebrow", "fldc9mN6wjp7v8JTT": "headline", "fld3H9i4WKvm3BUih": "body",
+    "fldhmtHcn6ikhSfqx": "bullets", "fldLASFn8wK0og0d9": "image", "fldLR6hAW5NL0FhUk": "buttonLabel",
+    "fldMECXW51pDXHZEn": "buttonUrl", "fldnLNpqXjYYJNuSo": "code", "fld3TtSBMYeALPZWs": "codeLabel",
+    "fldExkxVLLvB49PTh": "fine", "fldYizGfPpYYbIMHy": "linkLabel", "fldCMkaXAIbV4ao0o": "linkUrl",
+    "fld6ISLJ8GJkvKhAr": "showOn",
+}
+PROMO_PATH = "promo.json"
+
+
+def build_promo():
+    stamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+    try:
+        rows = [rename(r.get("fields") or {}, PROMO_FIELDS)
+                for r in airtable_all(PROMOS_TABLE)]
+    except BaseException as e:  # get_json raises SystemExit on HTTP errors
+        print(f"  WARNING: promotions not read ({e}); promo.json left as it was")
+        return
+    live = [r for r in rows if r.get("active")]
+    if not live:
+        write_json(PROMO_PATH, {"active": False, "generated": stamp})
+        print("  promo: none active")
+        return
+    p = live[0]
+    p["bullets"] = [b.strip() for b in (p.get("bullets") or "").splitlines()
+                    if b.strip()][:4]
+    p["image"] = clean_image_url(p.get("image"))
+    show = p.get("showOn") or "Free and Plus pages"
+    if isinstance(show, dict):
+        show = show.get("name") or "Free and Plus pages"
+    p["showOn"] = show
+    p["onFree"] = show != "Plus pages only"
+    p["onPlus"] = show != "Free pages only"
+    p["active"] = True
+    p["generated"] = stamp
+    write_json(PROMO_PATH, p)
+    print(f"  promo: {p.get('name')} (ends {p.get('endsOn')})")
+
+
 if __name__ == "__main__":
     main()
+    print("Fetching Airtable promotions ...")
+    build_promo()
