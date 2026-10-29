@@ -107,6 +107,10 @@ EP_FIELDS = {
     # 2026-10-04: a tick only. The members' show notes FILE lives in the
     # Worker's private R2 bucket and never appears in Airtable or here.
     "flddUHbMjDNUseecH": "Has Show Notes",
+    # 2026-10-29: the new site's search title and description for the free
+    # page (moving off Squarespace). Blank falls back on the site's side.
+    "fld3vBGkdyhBJ3jKJ": "SEO Title",
+    "fldWzkH2vfD3wLrLt": "SEO Description",
 }
 
 # Fields the related-episodes corpus needs, and only those. It is fetched
