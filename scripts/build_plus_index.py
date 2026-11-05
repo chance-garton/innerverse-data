@@ -59,6 +59,7 @@ OUT_PATH = "plus-index.json"
 # go out without those fields, as they did before 2026-09-25.
 EPISODES_DIR = "episodes"
 FREE_INDEX_PATH = "episodes-index.json"
+PLUS_SNAPSHOT_PATH = "data/site-plus.json"
 HOST_NAME = "Chance Garton"
 
 # Categories that name a SHOW rather than a theme, lower-cased for matching.
@@ -303,37 +304,10 @@ def get_json(url, tries=7):
 
 
 def plus_posts():
-    out, seen = [], set()
-    url, pages = COLLECTION, 0
-    while url and pages < 40:
-        data = get_json(SITE + url)
-        for it in data.get("items", []):
-            if it.get("id") in seen:
-                continue
-            seen.add(it.get("id"))
-            slug = it.get("urlId")
-            if not slug:
-                continue
-            cats = [c for c in (it.get("categories") or []) if isinstance(c, str)]
-            stamp = it.get("publishOn")
-            date = time.strftime("%Y-%m-%d", time.gmtime(stamp / 1000)) if isinstance(stamp, int) else ""
-            out.append({
-                "slug": slug,
-                # Squarespace returns titles HTML-escaped: "Marty Leeds &amp; ..."
-                "title": html.unescape(it.get("title") or ""),
-                "url": SITE + (it.get("fullUrl") or "/plus/" + slug),
-                "thumb": clean_image_url(it.get("assetUrl")),
-                "shows": [c for c in cats if c.strip().lower() in SHOWS],
-                "themes": [c for c in cats if c.strip().lower() not in SHOWS],
-                "date": date,
-            })
-        pages += 1
-        pg = data.get("pagination") or {}
-        nxt = pg.get("nextPageUrl")
-        if not (pg.get("nextPage") and nxt):
-            break
-        url = nxt + ("&" if "?" in nxt else "?") + "format=json&nojs=true"
-        time.sleep(1.0)
+    # The /plus list as it stood on Squarespace at the move (2026-11-04).
+    # The old collection JSON no longer exists, so it is read from a snapshot.
+    with open(PLUS_SNAPSHOT_PATH, encoding="utf-8") as fh:
+        out = [dict(p) for p in json.load(fh)["posts"]]
 
     # Merge in the redirect entries for deleted-but-still-findable episodes.
     # Guarded so a slug that's somehow live again on Squarespace is never
@@ -456,7 +430,7 @@ def enrich(posts):
 
 
 def main():
-    print("Fetching the /plus collection ...")
+    print("Reading the /plus list ...")
     posts = plus_posts()
     print(f"  {len(posts)} posts")
 

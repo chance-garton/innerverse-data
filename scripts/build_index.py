@@ -4,11 +4,13 @@ Build the episode index files for the InnerVerse /episodes search widget.
 
 Sources:
   1. Airtable "InnerVerse Episodes" base  -> episode metadata
-  2. The live Squarespace collection JSON -> canonical URL, thumbnail,
-     granular post tags, and proof the episode has a live public page
+  2. data/site-episodes.json -> the free pages that were live when the site
+     moved off Squarespace (2026-11-04): canonical URL, thumbnail, post tags.
+     Plus any Airtable row with "Free Page" ticked, for pages added since.
 
-Only episodes that exist in BOTH are written out, so the widget can never
-link to a page that is not there.
+Only episodes in that list are written out, so the widget can never link to a
+page that is not there. (Until 2026-11-05 the list came from the Squarespace
+collection JSON, which no longer exists.)
 
 Airtable fields are addressed by FIELD ID, not by name, on purpose: a field
 rename in the Airtable UI silently breaks name-based access (this has
@@ -70,6 +72,8 @@ F_QUOTES = "fld0YCssGV4dgqtkg"
 F_THEMES = "fldZ3ERjnHPk4aZpO"
 
 F_GUEST_NAME = "fld5YGyyN9zmfXdz4"
+F_FREE_PAGE = "fldxV9avv9qqI3I8w"   # checkbox "Free Page"
+SNAPSHOT_PATH = "data/site-episodes.json"
 
 
 def get_json(url, headers=None, tries=7):
@@ -123,34 +127,20 @@ def airtable_all(table):
         time.sleep(0.25)
 
 
-def site_index():
-    """Slug -> {url, thumb, title, tags} for every live post on /episodes."""
-    out = {}
-    seen = set()
-    url = COLLECTION
-    pages = 0
-    while url and pages < 60:
-        data = get_json(SITE + url)
-        for it in data.get("items", []):
-            if it.get("id") in seen:
-                continue
-            seen.add(it["id"])
-            slug = it.get("urlId")
-            if not slug:
-                continue
-            out[slug] = {
-                "url": SITE + (it.get("fullUrl") or "/episodes/" + slug),
-                "thumb": clean_image_url(it.get("assetUrl")),
-                "title": it.get("title") or "",
-                "tags": [t for t in (it.get("tags") or []) if isinstance(t, str)],
-            }
-        pages += 1
-        pg = data.get("pagination") or {}
-        nxt = pg.get("nextPageUrl")
-        if not (pg.get("nextPage") and nxt):
-            break
-        url = nxt + ("&" if "?" in nxt else "?") + "format=json&nojs=true"
-        time.sleep(1.0)
+def site_index(episodes):
+    """Slug -> {url, thumb, title, tags} for every free /episodes page:
+    the snapshot taken at the move off Squarespace, plus Airtable rows with
+    Free Page ticked."""
+    with open(SNAPSHOT_PATH, encoding="utf-8") as fh:
+        out = dict(json.load(fh)["pages"])
+    added = 0
+    for rec in episodes:
+        f = rec.get("fields") or {}
+        slug = f.get(F_SLUG)
+        if slug and f.get(F_FREE_PAGE) and slug not in out:
+            out[slug] = {"url": SITE + "/episodes/" + slug, "thumb": "", "title": "", "tags": []}
+            added += 1
+    print(f"  {added} added by the Free Page tick")
     return out
 
 
@@ -197,11 +187,11 @@ def main():
     episodes = airtable_all(EPISODES_TABLE)
     print(f"  {len(episodes)} rows")
 
-    print("Fetching live site collection ...")
-    live = site_index()
+    print("Reading the free page list ...")
+    live = site_index(episodes)
     print(f"  {len(live)} live posts")
     if len(live) < 50:
-        sys.exit("ERROR: live collection returned suspiciously few posts; refusing to write.")
+        sys.exit("ERROR: free page list is suspiciously short; refusing to write.")
 
     out = []
     skipped_year = skipped_nolive = skipped_noslug = 0
