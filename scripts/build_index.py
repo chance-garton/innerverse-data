@@ -73,6 +73,7 @@ F_THEMES = "fldZ3ERjnHPk4aZpO"
 
 F_GUEST_NAME = "fld5YGyyN9zmfXdz4"
 F_FREE_PAGE = "fldxV9avv9qqI3I8w"   # checkbox "Free Page"
+F_EPNUM = "fldcmDz1y2jJaMPj3"      # "Episode Number" (2026-11-05: Vibe Rant cards show it)
 SNAPSHOT_PATH = "data/site-episodes.json"
 
 
@@ -231,6 +232,7 @@ def main():
             "date": f.get(F_DATE) or "",
             "year": year,
             "duration": f.get(F_DURATION) or "",
+            "num": f.get(F_EPNUM) if isinstance(f.get(F_EPNUM), (int, float)) else None,
             "extra": searchable_extra(f),
         })
 
@@ -242,7 +244,7 @@ def main():
     stamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
 
     extra = {e["slug"]: e["extra"] for e in out if e["extra"]}
-    slim = [{k: v for k, v in e.items() if k != "extra"} for e in out]
+    slim = [{k: v for k, v in e.items() if k != "extra" and not (k == "num" and v is None)} for e in out]
 
     with open(OUT_PATH, "w", encoding="utf-8") as fh:
         json.dump({"generated": stamp, "count": len(slim), "episodes": slim},

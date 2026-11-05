@@ -416,6 +416,8 @@ def enrich(posts):
             e["topicLine"] = f["Topic Line"]
         if f.get("Plus Duration"):
             e["plusDuration"] = f["Plus Duration"]
+        if isinstance(f.get("Episode Number"), (int, float)):
+            e["num"] = f["Episode Number"]
         if f.get("Topics"):
             e["topics"] = list(f["Topics"])
         guests = [g.get("Name") for g in (ep.get("_guestsById") or {}).values() if g.get("Name")]
