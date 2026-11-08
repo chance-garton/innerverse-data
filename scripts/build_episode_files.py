@@ -111,6 +111,9 @@ EP_FIELDS = {
     # page (moving off Squarespace). Blank falls back on the site's side.
     "fld3vBGkdyhBJ3jKJ": "SEO Title",
     "fldWzkH2vfD3wLrLt": "SEO Description",
+    # 2026-11-08: the switch for a NEW /plus page on an old episode
+    # (build_plus_index.py reads it from the episode files).
+    "fldg7v5iWqlRm0M75": "Plus Page",
 }
 
 # Fields the related-episodes corpus needs, and only those. It is fetched

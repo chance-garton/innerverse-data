@@ -315,6 +315,53 @@ def get_json(url, tries=7):
     raise SystemExit("ERROR: exhausted retries")
 
 
+TOPIC_TO_THEME = {
+    "Consciousness & Reality": "Consciousness And Reality",
+    "Myth, Symbolism, & Language": "Myth-Symbolism-Language",
+    "Holistic Health": "Holistic Health",
+    "Historical Investigations": "Alternative History",
+}
+
+
+def add_plus_page_rows(out):
+    """Append an entry for every episode file whose row has Plus Page
+    ticked and is not already listed. Same shape as a snapshot entry."""
+    have = {p["slug"] for p in out}
+    added = 0
+    try:
+        names = sorted(os.listdir(EPISODES_DIR))
+    except FileNotFoundError:
+        return 0
+    seen = set()
+    for name in names:
+        if not name.endswith(".json") or name.startswith("_"):
+            continue
+        try:
+            with open(os.path.join(EPISODES_DIR, name), encoding="utf-8") as fh:
+                f = (json.load(fh) or {}).get("fields") or {}
+        except Exception:
+            continue
+        if not f.get("Plus Page"):
+            continue
+        slug = f.get("Plus Slug") or f.get("Slug")
+        if not slug or slug in have or slug in seen:
+            continue
+        seen.add(slug)
+        shows = ["Innerverse" if s == "InnerVerse" else s for s in (f.get("Show Categories") or [])]
+        themes = [TOPIC_TO_THEME[t] for t in (f.get("Topics") or []) if t in TOPIC_TO_THEME]
+        out.append({
+            "slug": slug,
+            "title": (f.get("Title") or slug) + " (PLUS)",
+            "url": SITE + "/plus/" + slug,
+            "thumb": f.get("Plus Thumbnail URL") or f.get("Thumbnail URL") or "",
+            "shows": shows,
+            "themes": themes,
+            "date": (f.get("Publish Date") or "")[:10],
+        })
+        added += 1
+    return added
+
+
 def plus_posts():
     # The /plus list as it stood on Squarespace at the move (2026-11-04).
     # The old collection JSON no longer exists, so it is read from a snapshot.
@@ -328,6 +375,12 @@ def plus_posts():
     for slug, entry in REDIRECTS.items():
         if slug not in live_slugs:
             out.append({"slug": slug, **entry})
+
+    # 2026-11-08: rows with "Plus Page" ticked get a members' page even
+    # though they were never on Squarespace. Read from the episode files
+    # build_episode_files.py wrote earlier in this same run.
+    added = add_plus_page_rows(out)
+    print(f"  {added} added by the Plus Page tick")
 
     for e in out:
         e["thumb"] = clean_image_url(e.get("thumb"))

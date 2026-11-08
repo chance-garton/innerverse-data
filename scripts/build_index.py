@@ -208,7 +208,9 @@ def main():
             year = int(str(f.get(F_YEAR) or "")[:4])
         except Exception:
             year = None
-        if year is None or year < MIN_YEAR:
+        # 2026-11-08 (Chance): a pre-2020 row gets through when he has
+        # approved it for the site, which is what a ticked Free Page means.
+        if (year is None or year < MIN_YEAR) and not f.get(F_FREE_PAGE):
             skipped_year += 1
             continue
 
