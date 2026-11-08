@@ -124,6 +124,18 @@ SHOWS = {
 # ("Holistic Health" / "Myth-Symbolism-Language" etc, renamed to match the
 # /plus taxonomy's hyphenated theme names) and its own publish date.
 REDIRECTS = {
+    # 2026-11-08: Chance's guest spot on Dawn Lester's Dawn of Discernment,
+    # repackaged as a free "swapcast". Chance: "same page feeding into the
+    # episodes and plus pages and no distinct free/plus divides". Chance Guest
+    # Spots is not in FREE_SHOWS, so it needs this one-off entry, as crrow777.
+    "does-christianity-need-the-devil": {
+        "title": "Does Christianity NEED the Devil? Chance Garton & Dawn Lester",
+        "url": SITE + "/episodes/does-christianity-need-the-devil",
+        "thumb": "https://images.innerversepodcast.com/sq/chance-garton-innerverse-site-main-data-images-incoming-does-christianity-need-the-devil/no-devil-no-priests-thumbnail/orig.jpg",
+        "shows": ["Chance Guest Spots"],
+        "themes": ["Myth-Symbolism-Language", "Consciousness And Reality"],
+        "date": "2026-11-08",
+    },
         # 2026-09-18: robert-comber-lost-octave is the reverse case again - a
     # free /episodes post with no /plus page. The guest objected to the
     # second half being paywalled, so the FULL 2h20m version was published
