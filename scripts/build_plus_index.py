@@ -124,6 +124,27 @@ SHOWS = {
 # ("Holistic Health" / "Myth-Symbolism-Language" etc, renamed to match the
 # /plus taxonomy's hyphenated theme names) and its own publish date.
 REDIRECTS = {
+    # 2026-11-14: Michael Tsarion was re-released in full for free, so there is
+    # no members' cut; Chance: "One page goes in both archives." The free page
+    # now plays the full Vimeo upload.
+    "michael-tsarion": {
+        "title": "Michael Tsarion | The Self & the Mysterium (Free InnerVerse Plus+ Show!)",
+        "url": SITE + "/episodes/michael-tsarion",
+        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1707179036512-O7GSE8QFB3P4MHQWJ0LI/michael-tsarion.jpg",
+        "shows": ["Innerverse"],
+        "themes": ["Consciousness And Reality", "Myth-Symbolism-Language"],
+        "date": "2024-02-06",
+    },
+    # 2026-11-14: Chance's 2021 guest spot on Kerri Hummingbird's Soul Nectar
+    # Show, free in full (Chance Guest Spots is not in FREE_SHOWS).
+    "soul-nectar-contemplating-the-innerverse": {
+        "title": "Contemplating the Innerverse with Chance Garton on Soul Nectar Show",
+        "url": SITE + "/episodes/soul-nectar-contemplating-the-innerverse",
+        "thumb": "https://images.innerversepodcast.com/sq/chance-garton-innerverse-site-main-data-images-incoming-soul-nectar-contemplating-the-innerverse/contemplating-the-innerverse-thumbnail/orig.jpg",
+        "shows": ["Chance Guest Spots"],
+        "themes": ["Consciousness And Reality", "Holistic Health"],
+        "date": "2021-06-27",
+    },
     # 2026-11-08: Chance's guest spot on Dawn Lester's Dawn of Discernment,
     # repackaged as a free "swapcast". Chance: "same page feeding into the
     # episodes and plus pages and no distinct free/plus divides". Chance Guest
