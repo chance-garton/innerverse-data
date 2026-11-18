@@ -114,6 +114,10 @@ EP_FIELDS = {
     # 2026-11-08: the switch for a NEW /plus page on an old episode
     # (build_plus_index.py reads it from the episode files).
     "fldg7v5iWqlRm0M75": "Plus Page",
+    # 2026-11-18: where the site's players start on first play (skip a long
+    # intro). Seconds on the free video clock, and on the members' clock.
+    "fldlyXXJ5aLLLxjNS": "Intro Skip Seconds",
+    "fldwNzyAk8aGwHQV5": "Plus Intro Skip Seconds",
 }
 
 # Fields the related-episodes corpus needs, and only those. It is fetched
