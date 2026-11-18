@@ -124,6 +124,17 @@ SHOWS = {
 # ("Holistic Health" / "Myth-Symbolism-Language" etc, renamed to match the
 # /plus taxonomy's hyphenated theme names) and its own publish date.
 REDIRECTS = {
+    # 2026-11-18: the 2020 Spirit Whirled livestream with Dylan Saccoccio and
+    # Matt Landman predates Vibe Rant, so Chance made it an InnerVerse episode,
+    # free to all, one page listed in both /episodes and /plus.
+    "dylan-saccoccio-matt-landman": {
+        "title": "Spirit Whirled | 8/19/20 Livestream with Dylan Saccoccio & Matt Landman",
+        "url": SITE + "/episodes/dylan-saccoccio-matt-landman",
+        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1788914132121-TUZ8TD0M8IMD2SJT8ILK/2020-08-22-spirit-whirled-landman-1280x720.jpg",
+        "shows": ["Innerverse"],
+        "themes": ["Consciousness And Reality"],
+        "date": "2020-08-22",
+    },
     # 2026-11-14: Michael Tsarion was re-released in full for free, so there is
     # no members' cut; Chance: "One page goes in both archives." The free page
     # now plays the full Vimeo upload.
