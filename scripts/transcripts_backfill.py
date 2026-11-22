@@ -164,6 +164,8 @@ def check(paras, runtime, guests):
                 reasons.append("runs to %ds, past the %ds runtime (a longer cut?)" % (last, runtime))
     else:
         reasons.append("no free runtime (Duration) on the row")
+    if any(b["seek"] < a["seek"] for a, b in zip(paras, paras[1:])):
+        reasons.append("paragraph times go backwards")
     if words < MIN_WORDS:
         reasons.append("only %d words" % words)
     blob = " ".join(p["text"] for p in paras)
@@ -262,11 +264,12 @@ def main():
                 if n.returncode:
                     raise ValueError("convert: " + (n.stderr or n.stdout).strip().splitlines()[-1])
                 item["format"] = n.stdout.split()[0] if n.stdout.strip() else "?"
-                total = runtime or 0
-                if not total:
-                    # No runtime on the row: let the last block run 60 s; the check fails it anyway.
-                    stamps = re.findall(r"\((?:(\d+):)?(\d+):(\d+)", open(norm, encoding="utf-8").read())
-                    total = max((int(h or 0) * 3600 + int(m) * 60 + int(s) for h, m, s in stamps), default=0) + 60
+                # Duration is only to the minute, so the last block can start after it.
+                # The builder spreads the last block's paragraphs up to this end time,
+                # so it must be later than the last stamp or their times run backwards.
+                stamps = re.findall(r"\((?:(\d+):)?(\d+):(\d+)", open(norm, encoding="utf-8").read())
+                last_stamp = max((int(h or 0) * 3600 + int(m) * 60 + int(s) for h, m, s in stamps), default=0)
+                total = max(runtime or 0, last_stamp + 30)
                 b = subprocess.run([sys.executable, "-I", builder, norm, str(total), built], capture_output=True, text=True)
                 if b.returncode:
                     err = (b.stderr or b.stdout).strip().splitlines()
