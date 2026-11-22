@@ -11,8 +11,6 @@ name: Transcripts backfill
 # Committing transcripts/ does not start build-index.yml (its push paths are
 # only its own scripts and workflow).
 on:
-  push:                     # TEMPORARY: branch test run, removed before merge
-    branches: [transcripts-backfill]
   workflow_dispatch:
     inputs:
       count:
@@ -43,16 +41,16 @@ jobs:
   run:
     runs-on: ubuntu-latest
     env:
-      COUNT: ${{ inputs.count || '3' }}
-      MODE: ${{ inputs.mode || 'test' }}
-      SOURCE: ${{ inputs.source || 'airtable' }}
+      COUNT: ${{ inputs.count }}
+      MODE: ${{ inputs.mode }}
+      SOURCE: ${{ inputs.source }}
     steps:
       - uses: actions/checkout@v4
       - name: Get the converter and builder from the site repo
         uses: actions/checkout@v4
         with:
           repository: chance-garton/innerverse-site
-          ref: ${{ inputs.site_ref || 'transcripts-backfill' }}
+          ref: ${{ inputs.site_ref }}
           path: site
           sparse-checkout: |
             tools/episode-notes
