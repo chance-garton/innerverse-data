@@ -1,0 +1,90 @@
+name: Transcripts backfill
+
+# Builds the Transcript section data for older free /episodes pages
+# (scripts/transcripts_backfill.py). Run by hand only.
+#   mode test:  read only. The report and the built files are kept as a run
+#               artifact ("transcripts-report"); nothing is committed.
+#   mode apply: commits the passing files to transcripts/ plus _report.json.
+#               The site's hourly build (innerverse-site build.yml) picks up
+#               any new commit here, so an apply goes live within the hour
+#               even without dispatching build.yml.
+# Committing transcripts/ does not start build-index.yml (its push paths are
+# only its own scripts and workflow).
+on:
+  push:                     # TEMPORARY: branch test run, removed before merge
+    branches: [transcripts-backfill]
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "how many rows, newest first"
+        required: true
+        default: "40"
+      mode:
+        description: "test (report only) or apply (commit the passing files)"
+        required: true
+        default: test
+      source:
+        description: "airtable (the filed free transcript) or youtube (captions, not built yet)"
+        required: true
+        default: airtable
+      site_ref:
+        description: "innerverse-site branch to take the converter and builder from"
+        required: true
+        default: main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: transcripts
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      COUNT: ${{ inputs.count || '3' }}
+      MODE: ${{ inputs.mode || 'test' }}
+      SOURCE: ${{ inputs.source || 'airtable' }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Get the converter and builder from the site repo
+        uses: actions/checkout@v4
+        with:
+          repository: chance-garton/innerverse-site
+          ref: ${{ inputs.site_ref || 'transcripts-backfill' }}
+          path: site
+          sparse-checkout: |
+            tools/episode-notes
+            data/transcripts
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run
+        env:
+          AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
+        run: |
+          case "$MODE" in test|apply) ;; *) echo "mode must be test or apply"; exit 1;; esac
+          case "$SOURCE" in airtable|youtube) ;; *) echo "source must be airtable or youtube"; exit 1;; esac
+          case "$COUNT" in ''|*[!0-9]*) echo "count must be a number"; exit 1;; esac
+          python scripts/transcripts_backfill.py --count "$COUNT" --mode "$MODE" --source "$SOURCE" --site site
+      - name: Keep the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: transcripts-report
+          path: |
+            transcripts/_report.json
+            _test_out/
+          retention-days: 14
+          if-no-files-found: ignore
+      - name: Commit the passing transcripts
+        if: env.MODE == 'apply'
+        run: |
+          git config user.name  "innerverse-transcripts-bot"
+          git config user.email "actions@github.com"
+          git add transcripts
+          if git diff --cached --quiet; then echo "Nothing to commit"; exit 0; fi
+          git commit -m "Transcripts: backfill batch ($(date -u +%Y-%m-%d))"
+          for i in 1 2 3; do git pull --rebase origin main && git push && exit 0; sleep 5; done
+          exit 1

@@ -1,0 +1,5 @@
+{
+  "_about": "Per row name fixes for the transcript backfill (scripts/transcripts_backfill.py). Only names the transcriber misspelled: the row's own guests, or a name build_transcript.py FIXES does not cover. Never a rewrite of what was said. Key: page slug, or * for every row. Value: list of [as transcribed, correct].",
+  "*": [],
+  "inner-whirled-32": [["Faminko", "Fomenko"]]
+}
