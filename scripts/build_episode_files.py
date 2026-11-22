@@ -61,6 +61,26 @@ AFFILIATES_TABLE = "tblKjOK5bMcCEpk1p"
 
 OUT_DIR = "episodes"
 
+# Chance's order for the affiliates, everywhere on the site (set 2026-11-22).
+# Each episode file lists its "Affiliates Shown" in this order whatever order
+# the links sit in on the Airtable row, so a row only needs the right
+# affiliates linked. An affiliate not named here keeps its Airtable place
+# after the named ones. Names are the Affiliates table's Name field.
+AFFILIATE_ORDER = [
+    "Tippecanoe Herbs",
+    "The Sonic Slider",
+    "Spirit Whirled",
+    "LotusWei Flower Elixirs",
+    "Clive de Carle",
+    "RMDY Collective",
+    "AquaCure AC50",
+]
+
+
+def order_affiliates(aids, affiliates):
+    pos = {name: i for i, name in enumerate(AFFILIATE_ORDER)}
+    return sorted(aids, key=lambda a: pos.get((affiliates.get(a) or {}).get("Name"), len(pos)))
+
 # The host's Guests row. The render script appends it to every episode's
 # guest list whether or not the episode links him, so every file has to
 # carry it or his panel would vanish from the sidebar.
@@ -265,6 +285,9 @@ def main():
         if HOST_GUEST_ID not in gids:
             gids = gids + [HOST_GUEST_ID]
         aids = [a for a in (f.get("Affiliates Shown") or []) if isinstance(a, str)]
+        if aids:
+            aids = order_affiliates(aids, affiliates)
+            f["Affiliates Shown"] = aids
 
         payload = {
             "generated": stamp,
