@@ -22,7 +22,8 @@ Chance Guest Spots left out, it:
   4. applies the per row name fixes in transcripts/_name_fixes.json,
   5. checks the result: first paragraph under 60 s, last paragraph within
      5 percent of the free runtime (Duration), at least 3,000 words, no em or
-     en dashes, a guest's name present when the row has guests.
+     en dashes, a guest's name present when the row has guests, and no stretch
+     longer than 5 minutes without a real time in the source file.
 
 mode test:  writes transcripts/_report.json and the built files to _test_out/
             (the workflow keeps both as a run artifact). Nothing is committed.
@@ -65,6 +66,7 @@ GUEST_SPOTS = "Chance Guest Spots"
 MIN_WORDS = 3000
 FIRST_MAX = 60
 END_TOLERANCE = 0.05
+MAX_STAMP_GAP = 300
 
 TOKEN = os.environ.get("AIRTABLE_TOKEN", "").strip()
 
@@ -275,7 +277,13 @@ def main():
                 # The builder spreads the last block's paragraphs up to this end time,
                 # so it must be later than the last stamp or their times run backwards.
                 stamps = re.findall(r"\((?:(\d+):)?(\d+):(\d+)", open(norm, encoding="utf-8").read())
-                last_stamp = max((int(h or 0) * 3600 + int(m) * 60 + int(s) for h, m, s in stamps), default=0)
+                times = sorted(int(h or 0) * 3600 + int(m) * 60 + int(s) for h, m, s in stamps)
+                last_stamp = times[-1] if times else 0
+                # Real times in the source: the longest stretch with none is what the
+                # page has to guess across (paragraphs inside a block are timed by
+                # word position), so a file with too few real times is not published.
+                edges = times + [runtime or last_stamp]
+                item["maxStampGap"] = max((b - a for a, b in zip(edges, edges[1:])), default=0)
                 total = max(runtime or 0, last_stamp + 30)
                 b = subprocess.run([sys.executable, "-I", builder, norm, str(total), built], capture_output=True, text=True)
                 if b.returncode:
@@ -292,6 +300,8 @@ def main():
             item["lastSeek"] = paras[-1]["seek"] if paras else None
             item["runtimeSeconds"] = runtime
             reasons = check(paras, runtime, guests)
+            if item["maxStampGap"] > MAX_STAMP_GAP:
+                reasons.append("a %ds stretch with no real time in the file (times would be guesses)" % item["maxStampGap"])
             item["status"] = "fail" if reasons else "pass"
             item["reasons"] = reasons
             dest = os.path.join("transcripts" if (args.mode == "apply" and not reasons) else "_test_out", slug + ".json")
