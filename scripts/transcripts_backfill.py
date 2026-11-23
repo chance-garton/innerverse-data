@@ -262,7 +262,13 @@ def main():
                 open(src, "wb").write(data)
                 n = subprocess.run([sys.executable, "-I", normalize, src, norm], capture_output=True, text=True)
                 if n.returncode:
-                    raise ValueError("convert: " + (n.stderr or n.stdout).strip().splitlines()[-1])
+                    # Keep a small sample of how the file is laid out (a few short
+                    # lines, never the whole file) so a new layout can be added.
+                    txt = data.decode("utf-8-sig", "replace")
+                    lines = [l.strip()[:90] for l in txt.splitlines() if l.strip()]
+                    item["shape"] = {"lines": len(lines), "head": lines[:4], "middle": lines[len(lines) // 2:len(lines) // 2 + 3],
+                                     "digitsColon": len(re.findall(r"\d:\d\d", txt))}
+                    raise ValueError("convert: no timestamps in a layout the converter knows")
                 item["format"] = n.stdout.split()[0] if n.stdout.strip() else "?"
                 # Duration is only to the minute, so the last block can start after it.
                 # The builder spreads the last block's paragraphs up to this end time,
