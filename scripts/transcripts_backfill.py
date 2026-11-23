@@ -121,9 +121,10 @@ def runtime_seconds(s):
 
 
 def choose_attachment(atts):
-    for a in atts:
-        if (a.get("filename") or "").lower().endswith(".txt"):
-            return a
+    for ext in (".txt", ".vtt", ".srt"):
+        for a in atts:
+            if (a.get("filename") or "").lower().endswith(ext):
+                return a
     return atts[0] if atts else None
 
 
@@ -252,8 +253,8 @@ def main():
         try:
             if not att:
                 raise ValueError("no attachment")
-            if not (att.get("filename") or "").lower().endswith(".txt"):
-                raise ValueError("not a .txt file: %s" % att.get("filename"))
+            if not (att.get("filename") or "").lower().endswith((".txt", ".vtt", ".srt")):
+                raise ValueError("not a text or caption file: %s" % att.get("filename"))
             data = get(att["url"], raw=True)
             with tempfile.TemporaryDirectory() as tmp:
                 src = os.path.join(tmp, "in.txt")
