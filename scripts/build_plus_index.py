@@ -122,7 +122,7 @@ REDIRECTS = {
     "athen-chimenti-sidereal-astrology": {
         "title": "Athen Chimenti | The Inner Zodiac And True Sidereal Astrology",
         "url": SITE + "/episodes/athen-chimenti-sidereal-astrology",
-        "thumb": "https://assets.pippa.io/shows/5a7e6d34b56c94b1216394e3/1560530869785-1e14e6db39d3570182807ace5e660737.jpeg",
+        "thumb": "https://images.innerversepodcast.com/sq/shows-5a7e6d34b56c94b1216394e3/1560530869785-1e14e6db39d3570182807ace5e660737/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Myth-Symbolism-Language"],
         "date": "2019-06-14",
@@ -186,7 +186,7 @@ REDIRECTS = {
     "dylan-saccoccio-money-wealth-crypto": {
         "title": "Dylan Saccoccio | Serious Questions About Money, Wealth, Currency & Crypto",
         "url": SITE + "/episodes/dylan-saccoccio-money-wealth-crypto",
-        "thumb": "https://assets.pippa.io/shows/5a7e6d34b56c94b1216394e3/1618235123180-31cf35e094ed600cf5122579532b432a.jpeg",
+        "thumb": "https://images.innerversepodcast.com/sq/shows-5a7e6d34b56c94b1216394e3/1618235123180-31cf35e094ed600cf5122579532b432a/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Alternative History"],
         "date": "2021-04-12",
