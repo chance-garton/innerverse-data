@@ -139,7 +139,7 @@ REDIRECTS = {
     "dean-mcdonnell-lusid": {
         "title": "Dean McDonnell | The LuSiDelic Experience",
         "url": SITE + "/episodes/dean-mcdonnell-lusid",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1570108250801-9ASBPCH90WRY9CS30EC0/Enlight363.JPG",
+        "thumb": "https://images.innerversepodcast.com/sq/1570108250801-9asbpch90wry9cs30ec0/enlight363/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Consciousness And Reality"],
         "date": "2019-10-03",
@@ -147,7 +147,7 @@ REDIRECTS = {
     "bluetech-evan-bartholomew-holotrope": {
         "title": "Bluetech (Evan Bartholomew) | Holotrope & Streaming Cosmic Consciousness",
         "url": SITE + "/episodes/bluetech-evan-bartholomew-holotrope",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1573481141706-91S6ZBKQLSS16646ZDT9/Image_output.jpeg",
+        "thumb": "https://images.innerversepodcast.com/sq/1573481141706-91s6zbkqlss16646zdt9/image-output/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Consciousness And Reality"],
         "date": "2019-11-11",
@@ -155,7 +155,7 @@ REDIRECTS = {
     "soohan-super-heady-spiritual": {
         "title": "Stephen Suchan | Creating Soohan: A Super Heady Spiritual Journey",
         "url": SITE + "/episodes/soohan-super-heady-spiritual",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1788877188348-4K8L1G4BKBJPWXUD2C84/2020-02-26-soohan-1280x720.jpg",
+        "thumb": "https://images.innerversepodcast.com/sq/1788877188348-4k8l1g4bkbjpwxud2c84/2020-02-26-soohan-1280x720/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Consciousness And Reality"],
         "date": "2020-02-26",
@@ -163,7 +163,7 @@ REDIRECTS = {
     "matt-landman-questioning-coronavirus-narrative": {
         "title": "Matt Landman | Holes In The COVID-19 Narrative & The Great Panic Distraction",
         "url": SITE + "/episodes/matt-landman-questioning-coronavirus-narrative",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1788878184176-Z0ENBC6MWZJBUSJH24JM/2020-03-30-matt-landman-1280x720.jpg",
+        "thumb": "https://images.innerversepodcast.com/sq/1788878184176-z0enbc6mwzjbusjh24jm/2020-03-30-matt-landman-1280x720/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Consciousness And Reality"],
         "date": "2020-03-30",
@@ -171,7 +171,7 @@ REDIRECTS = {
     "athen-chimenti-2020-sidereal-astrology": {
         "title": "Athen Chimenti | Looking At 2020 Through Sidereal Astrology",
         "url": SITE + "/episodes/athen-chimenti-2020-sidereal-astrology",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1788914003189-ZA3W7YMBAVGZ5P2L2HL0/2020-08-09-athen-chimenti-1280x720.jpg",
+        "thumb": "https://images.innerversepodcast.com/sq/1788914003189-za3w7ymbavgz5p2l2hl0/2020-08-09-athen-chimenti-1280x720/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Myth-Symbolism-Language"],
         "date": "2020-08-10",
@@ -179,7 +179,7 @@ REDIRECTS = {
     "john-coleman-apocatastasis": {
         "title": "John Coleman | Rethinking Education With A Higher Perspective",
         "url": SITE + "/episodes/john-coleman-apocatastasis",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1788914916584-4IBUZLXANXKA1L02K4SA/2020-09-25-john-coleman-1280x720.jpg",
+        "thumb": "https://images.innerversepodcast.com/sq/1788914916584-4ibuzlxanxka1l02k4sa/2020-09-25-john-coleman-1280x720/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Consciousness And Reality"],
         "date": "2020-09-25",
@@ -187,7 +187,7 @@ REDIRECTS = {
     "miownize-michael-martin-talking-music": {
         "title": "MioWnize - Michael Martin Talking Music",
         "url": SITE + "/episodes/miownize-michael-martin-talking-music",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1788970482177-GHPMH6HZTSN2J5VED1S4/2021-03-29-miownize-music-1280x720.jpg",
+        "thumb": "https://images.innerversepodcast.com/sq/1788970482177-ghpmh6hztsn2j5ved1s4/2021-03-29-miownize-music-1280x720/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Holistic Health"],
         "date": "2021-03-29",
@@ -203,7 +203,7 @@ REDIRECTS = {
     "thinking-about-13-bonus-episode": {
         "title": "Thinking About 13 (BONUS EPISODE)",
         "url": SITE + "/episodes/thinking-about-13-bonus-episode",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1639600476945-7RNJ3KZQAKCORCSS7NZT/new-new-video-title-thumb.jpg",
+        "thumb": "https://images.innerversepodcast.com/sq/1639600476945-7rnj3kzqakcorcss7nzt/new-new-video-title-thumb/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Consciousness And Reality"],
         "date": "2021-12-15",
@@ -211,7 +211,7 @@ REDIRECTS = {
     "owen-benjamin": {
         "title": "Owen Benjamin: Canceling Fear, Turning Obstacles Into Opportunity and the Spontaneous Gravy of Now",
         "url": SITE + "/episodes/owen-benjamin",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1779206701338-V21MV2DLKF34YA1282FQ/Owen+Benjamin+Canceling+Fear%2C+Turning+Obstacles+Into+Opportunity+and+the+Spontaneous+Gravy+of+Now.png",
+        "thumb": "https://images.innerversepodcast.com/sq/1779206701338-v21mv2dlkf34ya1282fq/owen-benjamin-canceling-fear-turning-obstacles-into-opportunity-and-the-spontaneous-gravy-of-now/orig.png",
         "shows": ["Innerverse"],
         "themes": ["Consciousness And Reality"],
         "date": "2022-07-18",
@@ -219,7 +219,7 @@ REDIRECTS = {
     "music-and-sky-2022-alec-zeck-eileen-mckusick-kelly-brogan": {
         "title": "Kelly Brogan, Alec Zeck & Eileen McKusick: Knowing vs Believing | Live at Music and Sky",
         "url": SITE + "/episodes/music-and-sky-2022-alec-zeck-eileen-mckusick-kelly-brogan",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1778937274374-ZGEZJWZT9O04VKM4GZL3/Kelly+Brogan%2C+Alec+Zeck+%26+Eileen+McKusick+Knowing+vs+Believing++Live+at+Music+and+Sky.png",
+        "thumb": "https://images.innerversepodcast.com/sq/1778937274374-zgezjwzt9o04vkm4gzl3/kelly-brogan-alec-zeck-eileen-mckusick-knowing-vs-believing-live-at-music-and-sky/orig.png",
         "shows": ["Innerverse"],
         "themes": ["Holistic Health"],
         "date": "2022-10-23",
@@ -227,7 +227,7 @@ REDIRECTS = {
     "mario-garza-symbolic-studies-chaos": {
         "title": "Mario Garza | The Temple of the Muses: Decoding Chaos and the Origin of the World",
         "url": SITE + "/episodes/mario-garza-symbolic-studies-chaos",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1667232641572-54DFYBP1NRI8PJODFXZU/IMG_3953.PNG",
+        "thumb": "https://images.innerversepodcast.com/sq/1667232641572-54dfybp1nri8pjodfxzu/img-3953/orig.png",
         "shows": ["Innerverse"],
         "themes": ["Myth-Symbolism-Language"],
         "date": "2022-10-31",
@@ -235,7 +235,7 @@ REDIRECTS = {
     "john-mchugh-celestial-code": {
         "title": "John McHugh | The Celestial Nativity & The Cuneiform Code of Scriptural Miracles",
         "url": SITE + "/episodes/john-mchugh-celestial-code",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1670905657204-1S70EC3HCN27RC2IH5FA/IMG_0057.PNG",
+        "thumb": "https://images.innerversepodcast.com/sq/1670905657204-1s70ec3hcn27rc2ih5fa/img-0057/orig.png",
         "shows": ["Innerverse"],
         "themes": ["Myth-Symbolism-Language"],
         "date": "2022-12-13",
@@ -243,7 +243,7 @@ REDIRECTS = {
     "david-mathisen-thor": {
         "title": "David Mathisen | Star Myths of the Norse: Thor, the Universal Thunderer, & the Holy World Tree",
         "url": SITE + "/episodes/david-mathisen-thor",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1676913604334-C8J93103ANLHXVDKJLM4/IMG_1041.JPG",
+        "thumb": "https://images.innerversepodcast.com/sq/1676913604334-c8j93103anlhxvdkjlm4/img-1041/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Myth-Symbolism-Language"],
         "date": "2023-02-20",
@@ -251,7 +251,7 @@ REDIRECTS = {
     "jim-gale-food-forest": {
         "title": "Jim Gale | Freedom Through Food Forests, & Resilient Living By Building With Natural Synergy",
         "url": SITE + "/episodes/jim-gale-food-forest",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1678073421096-5TUGLCZ05WBL0CDAGR1D/IMG_1223.JPG",
+        "thumb": "https://images.innerversepodcast.com/sq/1678073421096-5tuglcz05wbl0cdagr1d/img-1223/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Holistic Health"],
         "date": "2023-03-06",
@@ -259,7 +259,7 @@ REDIRECTS = {
     "amandha-vollmer": {
         "title": "Amandha Vollmer | The Yum Natural Doctor: Naturopathy, Right Action, & Harnessing Creativity",
         "url": SITE + "/episodes/amandha-vollmer",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1682970170035-UVB0YG6L1V2UXQRYVHSG/IMG_1905.PNG",
+        "thumb": "https://images.innerversepodcast.com/sq/1682970170035-uvb0yg6l1v2uxqryvhsg/img-1905/orig.png",
         "shows": ["Innerverse"],
         "themes": ["Holistic Health"],
         "date": "2023-05-01",
@@ -267,7 +267,7 @@ REDIRECTS = {
     "david-mathisen-ophiuchus": {
         "title": "David Mathisen & Mario Garza | Ophiuchus Astrotheology: The Wisdom Gate to Higher Self",
         "url": SITE + "/episodes/david-mathisen-ophiuchus",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1701126690159-0F8UBTXP5YDDMN8QQMDS/IMG_3723.JPG",
+        "thumb": "https://images.innerversepodcast.com/sq/1701126690159-0f8ubtxp5yddmn8qqmds/img-3723/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Consciousness And Reality", "Myth-Symbolism-Language"],
         "date": "2023-11-28",
@@ -275,7 +275,7 @@ REDIRECTS = {
     "john-mchugh-star-of-bethlehem": {
         "title": "John McHugh | The Royal Star of Bethlehem: Lost Celestial Origins of the Christmas Story",
         "url": SITE + "/episodes/john-mchugh-star-of-bethlehem",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1702947172765-AJ425L1RWLO3SJ8G403H/IMG_3875.JPG",
+        "thumb": "https://images.innerversepodcast.com/sq/1702947172765-aj425l1rwlo3sj8g403h/img-3875/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Myth-Symbolism-Language"],
         "date": "2023-12-19",
@@ -286,7 +286,7 @@ REDIRECTS = {
     "dylan-saccoccio-matt-landman": {
         "title": "Spirit Whirled | 8/19/20 Livestream with Dylan Saccoccio & Matt Landman",
         "url": SITE + "/episodes/dylan-saccoccio-matt-landman",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1788914132121-TUZ8TD0M8IMD2SJT8ILK/2020-08-22-spirit-whirled-landman-1280x720.jpg",
+        "thumb": "https://images.innerversepodcast.com/sq/1788914132121-tuz8td0m8imd2sjt8ilk/2020-08-22-spirit-whirled-landman-1280x720/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Consciousness And Reality"],
         "date": "2020-08-22",
@@ -297,7 +297,7 @@ REDIRECTS = {
     "michael-tsarion": {
         "title": "Michael Tsarion | The Self & the Mysterium (Free InnerVerse Plus+ Show!)",
         "url": SITE + "/episodes/michael-tsarion",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1707179036512-O7GSE8QFB3P4MHQWJ0LI/michael-tsarion.jpg",
+        "thumb": "https://images.innerversepodcast.com/sq/1707179036512-o7gse8qfb3p4mhqwj0li/michael-tsarion/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Consciousness And Reality", "Myth-Symbolism-Language"],
         "date": "2024-02-06",
@@ -333,7 +333,7 @@ REDIRECTS = {
     "robert-comber-lost-octave": {
         "title": "Robert Comber | The Lost Octave of the I Ching: Star Lore, Number, & The Cosmic Language Pattern",
         "url": SITE + "/episodes/robert-comber-lost-octave",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1713195924164-7B0L6DSJJZ0KQV973ZLN/IMG_4732.JPG",
+        "thumb": "https://images.innerversepodcast.com/sq/1713195924164-7b0l6dsjjz0kqv973zln/img-4732/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Consciousness And Reality", "Myth-Symbolism-Language"],
         "date": "2024-04-15",
@@ -347,7 +347,7 @@ REDIRECTS = {
     "clive-de-carle-nutritional-gnosis": {
         "title": "Clive De Carle | Effective Nutritional Gnosis: Supplements, Health Technology & the Magic Chair",
         "url": SITE + "/episodes/clive-de-carle-nutritional-gnosis",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1735662645314-598PS88WFXPXLQOPDT05/IMG_6786.JPG",
+        "thumb": "https://images.innerversepodcast.com/sq/1735662645314-598ps88wfxpxlqopdt05/img-6786/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Holistic Health"],
         "date": "2024-12-31",
@@ -355,7 +355,7 @@ REDIRECTS = {
     "elise-frosch": {
         "title": "Elise Frosch | Preparing For Childbearing: Advice and Techniques For Ecstatic Natural Birth",
         "url": SITE + "/episodes/elise-frosch",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1720536260358-J27KNL8VLM7L0WOENXMV/IMG_5280.JPG",
+        "thumb": "https://images.innerversepodcast.com/sq/1720536260358-j27knl8vlm7l0woenxmv/img-5280/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Holistic Health"],
         "date": "2024-07-09",
@@ -363,7 +363,7 @@ REDIRECTS = {
 "crrow777-revelation": {
         "title": "Was the Book of Revelation Rewritten? Crrow777 w/ Chance Garton",
         "url": SITE + "/episodes/crrow-777-revelation",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1784137886568-KVUH2MF5UQ9EOCTO04HV/crrow777-1st.jpg",
+        "thumb": "https://images.innerversepodcast.com/sq/1784137886568-kvuh2mf5uq9eocto04hv/crrow777-1st/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Myth-Symbolism-Language", "Alternative History"],
         "date": "2026-07-15",
@@ -371,7 +371,7 @@ REDIRECTS = {
     "royal-stars": {
         "title": "The Four Evangelists, Four Horsemen and the Sphinx Encode The Royal Stars",
         "url": SITE + "/episodes/royal-stars",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1779228340119-8RHVQV7VW51ZUQTVZ5IK/Dylan+Saccoccio+The+Four+Evangelists+Are+the+Four+Royal+Stars%2C+and+so+are+the+Four+Horsemen.png",
+        "thumb": "https://images.innerversepodcast.com/sq/1779228340119-8rhvqv7vw51zuqtvz5ik/dylan-saccoccio-the-four-evangelists-are-the-four-royal-stars-and-so-are-the-four-horsemen/orig.png",
         "shows": ["Inner Whirled", "Innerverse"],
         "themes": ["Myth-Symbolism-Language"],
         "date": "2021-05-06",
@@ -379,7 +379,7 @@ REDIRECTS = {
     "oera-linda-manuscript-a454d": {
         "title": "The Oera Linda Book Part 2: Allegory, the Holy Sailors and the Astro-Theology Beneath the Manuscript",
         "url": SITE + "/episodes/oera-linda-manuscript",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1779377198021-KZ56ZY5JAPOHX4LGUU8B/The+Oera+Linda+Book+Part+2+Allegory%2C+the+Holy+Sailors+and+the+Astro-Theology+Beneath+the+Manuscript.png",
+        "thumb": "https://images.innerversepodcast.com/sq/1779377198021-kz56zy5japohx4lguu8b/the-oera-linda-book-part-2-allegory-the-holy-sailors-and-the-astro-theology-beneath-the-manuscript/orig.png",
         "shows": ["Inner Whirled"],
         "themes": ["Myth-Symbolism-Language", "Alternative History"],
         "date": "2023-09-20",
@@ -387,7 +387,7 @@ REDIRECTS = {
     "oera-linda-book-examined": {
         "title": "The Oera Linda Book: A Forbidden Frisian Manuscript Examined With Dylan Saccoccio & Slick Dissident",
         "url": SITE + "/episodes/oera-linda-book",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1779375486345-LLC3580FFP3NDVZ5KLIS/The+Oera+Linda+Book+A+Forbidden+Frisian+Manuscript+Examined+With+Dylan+Saccoccio.png",
+        "thumb": "https://images.innerversepodcast.com/sq/1779375486345-llc3580ffp3ndvz5klis/the-oera-linda-book-a-forbidden-frisian-manuscript-examined-with-dylan-saccoccio/orig.png",
         "shows": ["Inner Whirled"],
         "themes": ["Myth-Symbolism-Language", "Alternative History"],
         "date": "2023-08-23",
@@ -395,7 +395,7 @@ REDIRECTS = {
     "jan-ott-dylan-saccoccio-oera-linda-book": {
         "title": "Jan Ott & Dylan Saccoccio | The Oera Linda Book: Linguistic Artifacts of Post-Flood Hidden History",
         "url": SITE + "/episodes/jan-ott-dylan-saccoccio-oera-linda-book",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1693163099558-82ULR2PTSKI9BUBCLV0L/IMG_2871.JPG",
+        "thumb": "https://images.innerversepodcast.com/sq/1693163099558-82ulr2ptski9bubclv0l/img-2871/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Myth-Symbolism-Language", "Alternative History"],
         "date": "2023-08-28",
@@ -403,7 +403,7 @@ REDIRECTS = {
     "dylan-saccoccio-norse-phoenicians-te78l": {
         "title": "Phoenician Origins of Norse Mythology: Dylan Saccoccio on the Trail of the Holy Sailors",
         "url": SITE + "/episodes/dylan-saccoccio-norse-phoenicians-te78l",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1779280397625-U6L03NZQ6NF1L06HZG7P/Phoenician+Origins+of+Norse+Mythology+Dylan+Saccoccio+on+the+Trail+of+the+Holy+Sailors.png",
+        "thumb": "https://images.innerversepodcast.com/sq/1779280397625-u6l03nzq6nf1l06hzg7p/phoenician-origins-of-norse-mythology-dylan-saccoccio-on-the-trail-of-the-holy-sailors/orig.png",
         "shows": ["Inner Whirled", "Innerverse"],
         "themes": ["Myth-Symbolism-Language", "Alternative History"],
         "date": "2023-04-16",
@@ -411,7 +411,7 @@ REDIRECTS = {
     "astroherbalism-gemini": {
         "title": "Gemini Astro-Herbalism: Mercury, The Air Element, & Herbal Signatures",
         "url": SITE + "/episodes/astroherbalism-gemini",
-        "thumb": "https://images.squarespace-cdn.com/content/5987d897cf81e0278ec5322e/1780664773490-213VV4VPZJFH1B8N68QI/Gemini+Herbs+Mercury%2C+Cedar%2C+Holy+Basil+%26+The+Mint+Mystery++Astro-Herbalism.png",
+        "thumb": "https://images.innerversepodcast.com/sq/1780664773490-213vv4vpzjfh1b8n68qi/gemini-herbs-mercury-cedar-holy-basil-the-mint-mystery-astro-herbalism/orig.png",
         "shows": ["Astro-Herbalism", "Vibe Rant"],
         "themes": ["Holistic Health", "Myth-Symbolism-Language"],
         "date": "2026-06-05",
@@ -419,7 +419,7 @@ REDIRECTS = {
     "astroherbalism-cancer": {
         "title": "Cancer Astro-Herbalism: Linden, Willow, Marshmallow & Aloe",
         "url": SITE + "/episodes/astroherbalism-cancer",
-        "thumb": "https://images.squarespace-cdn.com/content/5987d897cf81e0278ec5322e/1788905125293-1HCB4AP9SAO2UQETQKR0/Cancer+Season+Herbs+Linden%2C+Willow%2C+Marshmallow%2C+Aloe++Astro+Herbalism.jpg",
+        "thumb": "https://images.innerversepodcast.com/sq/1788905125293-1hcb4ap9sao2uqetqkr0/cancer-season-herbs-linden-willow-marshmallow-aloe-astro-herbalism/orig.jpg",
         "shows": ["Astro-Herbalism", "Vibe Rant"],
         "themes": ["Holistic Health", "Myth-Symbolism-Language"],
         "date": "2026-06-17",
@@ -427,7 +427,7 @@ REDIRECTS = {
     "leo-astroherbalism": {
         "title": "St John's Wort, Motherwort & Hawthorn: Leo Season Herbs",
         "url": SITE + "/episodes/leo-astroherbalism",
-        "thumb": "https://images.squarespace-cdn.com/content/5987d897cf81e0278ec5322e/1786888416132-9H0MKV4JJKDLQ2D2TH11/ASTROHERBALISM+VIBE+RANT+LEO+INNERVERSE.png",
+        "thumb": "https://images.innerversepodcast.com/sq/1786888416132-9h0mkv4jjkdlq2d2th11/astroherbalism-vibe-rant-leo-innerverse/orig.png",
         "shows": ["Astro-Herbalism", "Vibe Rant"],
         "themes": ["Holistic Health", "Myth-Symbolism-Language"],
         "date": "2026-08-16",
@@ -435,7 +435,7 @@ REDIRECTS = {
     "astroherbalism-virgo": {
         "title": "Virgo Season Herbs: Gentle Plant Medicine for Digestion, Nerves & Calm",
         "url": SITE + "/episodes/astroherbalism-virgo",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1789568552495-0SKTMKOZUX0D3HJKVL4I/ASTROHERBALISM+VIRGO+INNERVERSE.png",
+        "thumb": "https://images.innerversepodcast.com/sq/1789568552495-0sktmkozux0d3hjkvl4i/astroherbalism-virgo-innerverse/orig.png",
         "shows": ["Astro-Herbalism", "Vibe Rant"],
         "themes": ["Holistic Health", "Myth-Symbolism-Language"],
         "date": "2026-09-16",
@@ -444,7 +444,7 @@ REDIRECTS = {
     "astroherbalism-libra": {
         "title": "Libra Herbs: What Makes a Plant Venusian?",
         "url": SITE + "/episodes/astroherbalism-libra",
-        "thumb": "https://images.squarespace-cdn.com/content/5987d897cf81e0278ec5322e/11923032-4880-4cce-a7bf-bb2a4e0b52de/Libra-herbs_-goddess-of-balance.jpg",
+        "thumb": "https://images.innerversepodcast.com/sq/11923032-4880-4cce-a7bf-bb2a4e0b52de/libra-herbs-goddess-of-balance/orig.jpg",
         "shows": ["Astro-Herbalism", "Vibe Rant"],
         "themes": ["Holistic Health", "Myth-Symbolism-Language"],
         "date": "2026-10-21",
@@ -457,7 +457,7 @@ REDIRECTS = {
     "call-of-the-old-gods": {
         "title": "The Call of the Old Gods: Paganism & the Cosmic Archetypal Psyche | Dr. Christopher McIntosh",
         "url": SITE + "/episodes/christopher-mcintosh-call-of-the-old-gods",
-        "thumb": "https://images.squarespace-cdn.com/content/5987d897cf81e0278ec5322e/1750350587770-492O095QJUIBUJCIPG3C/mcintosh-sq-thumb.jpg?content-type=image%2Fjpeg",
+        "thumb": "https://images.innerversepodcast.com/sq/1750350587770-492o095qjuibujcipg3c/mcintosh-sq-thumb/orig.jpg",
         "shows": ["Innerverse"],
         "themes": ["Myth-Symbolism-Language", "Consciousness And Reality"],
         "date": "2025-06-19",
@@ -471,7 +471,7 @@ REDIRECTS = {
     "kurtis-r-kallenbach-placenta": {
         "title": "Your Birth Certificate Belongs to a Dead Person: The Placenta Mystery | Kurtis R. Kallenbach",
         "url": SITE + "/episodes/kurtis-r-kallenbach-placenta",
-        "thumb": "https://images.squarespace-cdn.com/content/v1/5987d897cf81e0278ec5322e/1780603254560-BAGCUSRQ2QROPM3A17CH/Your+Birth+Certificate+Belongs+to+a+Dead+Person+The+Placenta+Mystery++Kurtis+R.+Kallenbach.png",
+        "thumb": "https://images.innerversepodcast.com/sq/1780603254560-bagcusrq2qropm3a17ch/your-birth-certificate-belongs-to-a-dead-person-the-placenta-mystery-kurtis-r-kallenbach/orig.png",
         "shows": ["Vibe Rant"],
         "themes": ["Holistic Health", "Alternative History"],
         "date": "2023-05-10",
