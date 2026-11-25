@@ -107,6 +107,9 @@ EP_FIELDS = {
     "fldLgLKhc4XWca00E": "Topics",
     "fld9Ljoj6WcnhudCr": "Show Categories",
     "fldTZzCqTSk8Ou8XK": "Use New Template",
+    # Read so the build can tell which rows have a members' video, but never
+    # written out: main() swaps it for "Has Plus Video": true. Members get the
+    # link itself from the sign-in Worker's /video-link (2026-11-25).
     "fldc2niCZSekUFcmF": "Plus Video URL",
     "fldAj47ivVr6VCRmr": "Plus Audio URL",
     "fld5zjdCUxURJ5EY6": "Plus Chapters JSON",
@@ -263,6 +266,9 @@ def main():
     for rec in rows:
         raw = rec.get("fields") or {}
         f = rename(raw, EP_FIELDS)
+        # The members' video link stays out of the public files; only a yes.
+        if f.pop("Plus Video URL", None):
+            f["Has Plus Video"] = True
         slug = f.get("Slug")
         if not slug:
             continue
@@ -300,7 +306,7 @@ def main():
             written[name] = rec["id"]
             write_json(os.path.join(OUT_DIR, name + ".json"), payload)
 
-        if f.get("Plus Video URL"):
+        if f.get("Has Plus Video"):
             date = f.get("Publish Date") or ""
             if not newest_plus or date > (newest_plus.get("date") or ""):
                 newest_plus = {
