@@ -2,7 +2,7 @@
 """
 Build plus-index.json: every live post in the members' /plus collection.
 
-Sourced entirely from the live Squarespace collection, NOT from Airtable,
+Sourced from the snapshot of the old site's /plus collection, NOT from Airtable,
 deliberately. As of 2026-09 Airtable holds only 57 of the 108 /plus posts,
 so an Airtable-sourced filter would silently hide half the members'
 catalogue. Every /plus post, by contrast, already carries complete
@@ -34,18 +34,9 @@ import urllib.error
 import urllib.request
 
 def clean_image_url(u):
-    """Strip the query off a Squarespace image URL.
-
-    The CDN only honours format= as the FIRST query parameter, so a stored
-    URL like ...png?content-type=image%2Fpng defeats every attempt to resize
-    it later and the full size file is served instead. The site always
-    appends its own format=, so the clean base URL is what belongs in the
-    index files. See claude/iv-home.md in the Website Recode project.
-    """
-    u = (u or "").strip()
-    if "images.squarespace-cdn.com" in u and "?" in u:
-        return u.split("?", 1)[0]
-    return u
+    """An image address as stored, trimmed. Every image now lives on
+    images.innerversepodcast.com, which the site sizes itself."""
+    return (u or "").strip()
 
 
 SITE = "https://www.innerversepodcast.com"
@@ -54,7 +45,7 @@ OUT_PATH = "plus-index.json"
 
 # Where the enrichment comes from: the per-episode files (one per Slug and
 # one per Plus Slug, so a members' slug resolves directly) and the free
-# index (for the Squarespace tags on the free post). Both are written
+# index (for the old site's tags on the free post). Both are written
 # earlier in the same workflow run; if either is absent the entries simply
 # go out without those fields, as they did before 2026-09-25.
 EPISODES_DIR = "episodes"
@@ -77,8 +68,8 @@ SHOWS = {
 
 # "Redundant" /plus entries: free-only episodes that had a /plus page for
 # discoverability but no distinct Plus cut, and whose /plus page has since
-# been deleted (moved to Squarespace Trash). Once the post is gone it drops
-# out of the live Squarespace /plus collection entirely, so without this
+# been deleted on the old site. Once the post was gone it dropped
+# out of the /plus collection entirely, so without this
 # list it would silently vanish from /plus search instead of still being
 # findable. Add one entry here every time a page like this is deleted, so
 # the episode stays discoverable in /plus search and points at the real,
@@ -480,7 +471,7 @@ REDIRECTS = {
 
 
 def get_json(url, tries=7):
-    """GET with retry/backoff. Squarespace rate-limits the collection JSON."""
+    """GET with retry/backoff. Kept for any remote read."""
     for attempt in range(tries):
         req = urllib.request.Request(url, headers={"User-Agent": "innerverse-index-builder"})
         try:
@@ -551,13 +542,13 @@ def add_plus_page_rows(out):
 
 
 def plus_posts():
-    # The /plus list as it stood on Squarespace at the move (2026-11-04).
+    # The /plus list as it stood on the old site at the move (2026-11-04).
     # The old collection JSON no longer exists, so it is read from a snapshot.
     with open(PLUS_SNAPSHOT_PATH, encoding="utf-8") as fh:
         out = [dict(p) for p in json.load(fh)["posts"]]
 
     # Merge in the redirect entries for deleted-but-still-findable episodes.
-    # Guarded so a slug that's somehow live again on Squarespace is never
+    # Guarded so a slug that is also in the snapshot is never
     # double-listed - the real post always wins.
     live_slugs = {p["slug"] for p in out}
     for slug, entry in REDIRECTS.items():
@@ -565,7 +556,7 @@ def plus_posts():
             out.append({"slug": slug, **entry})
 
     # 2026-11-08: rows with "Plus Page" ticked get a members' page even
-    # though they were never on Squarespace. Read from the episode files
+    # though they were never on the old site. Read from the episode files
     # build_episode_files.py wrote earlier in this same run.
     added = add_plus_page_rows(out)
     print(f"  {added} added by the Plus Page tick")

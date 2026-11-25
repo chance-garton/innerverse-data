@@ -5,11 +5,11 @@ Build the episode index files for the InnerVerse /episodes search widget.
 Sources:
   1. Airtable "InnerVerse Episodes" base  -> episode metadata
   2. data/site-episodes.json -> the free pages that were live when the site
-     moved off Squarespace (2026-11-04): canonical URL, thumbnail, post tags.
+     moved to the new site (2026-11-04): canonical URL, thumbnail, post tags.
      Plus any Airtable row with "Free Page" ticked, for pages added since.
 
 Only episodes in that list are written out, so the widget can never link to a
-page that is not there. (Until 2026-11-05 the list came from the Squarespace
+page that is not there. (Until 2026-11-05 the list came from the old site's
 collection JSON, which no longer exists.)
 
 Airtable fields are addressed by FIELD ID, not by name, on purpose: a field
@@ -27,18 +27,9 @@ import urllib.parse
 import urllib.request
 
 def clean_image_url(u):
-    """Strip the query off a Squarespace image URL.
-
-    The CDN only honours format= as the FIRST query parameter, so a stored
-    URL like ...png?content-type=image%2Fpng defeats every attempt to resize
-    it later and the full size file is served instead. The site always
-    appends its own format=, so the clean base URL is what belongs in the
-    index files. See claude/iv-home.md in the Website Recode project.
-    """
-    u = (u or "").strip()
-    if "images.squarespace-cdn.com" in u and "?" in u:
-        return u.split("?", 1)[0]
-    return u
+    """An image address as stored, trimmed. Every image now lives on
+    images.innerversepodcast.com, which the site sizes itself."""
+    return (u or "").strip()
 
 
 AIRTABLE_TOKEN = os.environ.get("AIRTABLE_TOKEN", "").strip()
@@ -78,7 +69,7 @@ SNAPSHOT_PATH = "data/site-episodes.json"
 
 
 def get_json(url, headers=None, tries=7):
-    """GET with retry/backoff. Airtable and Squarespace both rate-limit."""
+    """GET with retry/backoff. Airtable rate-limits."""
     for attempt in range(tries):
         req = urllib.request.Request(
             url, headers={"User-Agent": "innerverse-index-builder", **(headers or {})}
@@ -130,7 +121,7 @@ def airtable_all(table):
 
 def site_index(episodes):
     """Slug -> {url, thumb, title, tags} for every free /episodes page:
-    the snapshot taken at the move off Squarespace, plus Airtable rows with
+    the snapshot taken at the move to the new site, plus Airtable rows with
     Free Page ticked."""
     with open(SNAPSHOT_PATH, encoding="utf-8") as fh:
         out = dict(json.load(fh)["pages"])

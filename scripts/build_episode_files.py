@@ -36,18 +36,9 @@ import urllib.parse
 import urllib.request
 
 def clean_image_url(u):
-    """Strip the query off a Squarespace image URL.
-
-    The CDN only honours format= as the FIRST query parameter, so a stored
-    URL like ...png?content-type=image%2Fpng defeats every attempt to resize
-    it later and the full size file is served instead. The site always
-    appends its own format=, so the clean base URL is what belongs in the
-    index files. See claude/iv-home.md in the Website Recode project.
-    """
-    u = (u or "").strip()
-    if "images.squarespace-cdn.com" in u and "?" in u:
-        return u.split("?", 1)[0]
-    return u
+    """An image address as stored, trimmed. Every image now lives on
+    images.innerversepodcast.com, which the site sizes itself."""
+    return (u or "").strip()
 
 
 AIRTABLE_TOKEN = os.environ.get("AIRTABLE_TOKEN", "").strip()
@@ -128,7 +119,7 @@ EP_FIELDS = {
     # Worker's private R2 bucket and never appears in Airtable or here.
     "flddUHbMjDNUseecH": "Has Show Notes",
     # 2026-10-29: the new site's search title and description for the free
-    # page (moving off Squarespace). Blank falls back on the site's side.
+    # page (the move to the new site). Blank falls back on the site's side.
     "fld3vBGkdyhBJ3jKJ": "SEO Title",
     "fldWzkH2vfD3wLrLt": "SEO Description",
     # 2026-11-08: the switch for a NEW /plus page on an old episode
